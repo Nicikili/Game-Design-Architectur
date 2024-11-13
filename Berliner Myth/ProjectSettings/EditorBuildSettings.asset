@@ -8,4 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Nicolas/Levels/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 9872429b94b1b2644825cc9b209810b3,
+      type: 3}
