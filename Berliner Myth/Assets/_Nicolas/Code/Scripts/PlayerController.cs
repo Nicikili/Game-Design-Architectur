@@ -8,9 +8,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private ParticleSystem clickEffect;
     [SerializeField] private InputActionReference move;
+    [SerializeField] private InputActionReference speak;
+    [SerializeField] private InputActionReference speakForBlue;
+    [SerializeField] private InputActionReference speakForRed;
 
     private float lookRotationSpeed = 8f;
-    private float motionSmoothTime = 0.1f;
 
     private void Awake()
     {
@@ -21,6 +23,8 @@ public class PlayerController : MonoBehaviour
     {
         move.action.performed += OnMovePerformed;
         move.action.Enable();
+
+        speak.action.performed += OnSpeechPerformed;
     }
 
     private void OnDisable()
@@ -34,6 +38,7 @@ public class PlayerController : MonoBehaviour
         FaceTarget();
     }
 
+    #region Move
     private void OnMovePerformed(InputAction.CallbackContext ctx)
     {
         Move(); // Call Move() when the left mouse button is clicked
@@ -80,4 +85,17 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed);
         }
     }
+    #endregion
+
+    #region Speech
+
+    private void OnSpeechPerformed(InputAction.CallbackContext ctx)
+    {
+        //disable movement
+        //switch player prefab to prefab of player on box
+
+        //if released switch back to normal player 
+    }
+
+    #endregion
 }

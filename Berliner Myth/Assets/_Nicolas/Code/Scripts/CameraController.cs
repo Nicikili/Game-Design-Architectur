@@ -5,11 +5,10 @@ using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
+    [SerializeField] private Transform target;
     [SerializeField] private InputActionReference zoom;
     [SerializeField] private InputActionReference rotate;
     [SerializeField] private InputActionReference look;
-
-    [SerializeField] Transform target;
 
     private float mouseScrollY;
     private float mouseX;
@@ -21,13 +20,26 @@ public class CameraController : MonoBehaviour
     private float maxZoom = 10f;
     private float currentZoom = 5f;
 
+    private void Awake()
+    {
+        // Bind to actions
+        zoom.action.performed += x => mouseScrollY = x.ReadValue<float>();
+        look.action.performed += x =>
+        {
+            if (isMouseWheelPressed) // Only update mouseX if middle mouse is pressed
+                mouseX = x.ReadValue<float>();
+            Debug.Log("I am pressed");
+        };
+        rotate.action.started += _ => isMouseWheelPressed = true;
+        rotate.action.canceled += _ => {
+            isMouseWheelPressed = false;
+            mouseX = 0f; // Reset mouseX to stop rotation when released
+        };
+
+    }
+
     private void OnEnable()
     {
-        zoom.action.performed += OnZoom;
-        rotate.action.performed += OnRotate;
-        look.action.started += OnMiddleMouseHold;
-        look.action.canceled += OnMiddleMouseRelease;
-
         zoom.action.Enable();
         rotate.action.Enable();
         look.action.Enable();
@@ -35,17 +47,12 @@ public class CameraController : MonoBehaviour
 
     private void OnDisable()
     {
-        zoom.action.performed -= OnZoom;
-        rotate.action.performed -= OnRotate;
-        look.action.started -= OnMiddleMouseHold;
-        look.action.canceled -= OnMiddleMouseRelease;
-
         zoom.action.Disable();
         rotate.action.Disable();
         look.action.Disable();
     }
 
-    private void Update()
+    void Update()
     {
         if (target == null) return;
 
@@ -56,36 +63,17 @@ public class CameraController : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * zoomSpeed);
     }
 
-    private void OnZoom(InputAction.CallbackContext ctx)
-    {
-        mouseScrollY = ctx.ReadValue<float>();
-    }
-
-    private void OnRotate(InputAction.CallbackContext ctx)
-    {
-        mouseX = ctx.ReadValue<float>();
-    }
-
-    private void OnMiddleMouseHold(InputAction.CallbackContext ctx)
-    {
-        isMouseWheelPressed = true;
-    }
-
-    private void OnMiddleMouseRelease(InputAction.CallbackContext ctx)
-    {
-        isMouseWheelPressed = false;
-    }
-
-    private void HandleRotation()
+    void HandleRotation()
     {
         if (isMouseWheelPressed)
         {
+            // Rotate the camera based on mouse X input
             float rotationAngle = mouseX * rotationSpeed;
             transform.RotateAround(target.position, Vector3.up, rotationAngle);
         }
     }
 
-    private void HandleZoom()
+    void HandleZoom()
     {
         currentZoom -= mouseScrollY * zoomSpeed;
         currentZoom = Mathf.Clamp(currentZoom, minZoom, maxZoom);

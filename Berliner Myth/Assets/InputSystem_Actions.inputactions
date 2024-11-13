@@ -20,14 +20,14 @@
                     "id": "66dc9a8e-951d-4525-a7f8-e5563dd351ea",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Hold",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
                     "name": "Rotate",
                     "type": "Value",
                     "id": "3bc2d528-a6cf-471e-88af-81000d4e7815",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Analog",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -40,6 +40,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Speach",
+                    "type": "Button",
+                    "id": "c9b5298c-8a69-40c6-9906-a9bd73137446",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SpeachBlue",
+                    "type": "Button",
+                    "id": "4b65871e-0305-4a3a-9ade-14c6b512f68c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SpeachRed",
+                    "type": "Button",
+                    "id": "5f5e0caf-6e8e-404f-b64f-4fa37c9f7a89",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -80,10 +107,43 @@
                     "name": "",
                     "id": "ec804635-6c77-48ea-975b-7a1fd718c012",
                     "path": "<Mouse>/middleButton",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "ActivateRotate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "177a5e82-3024-4871-8f53-6e644efc9348",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Speach",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3bc48e8a-723c-4927-82d8-7ad07230d04a",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpeachBlue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6f12f4d9-572e-4cd4-99b6-3e0dbc6e2353",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpeachRed",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
