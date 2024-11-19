@@ -10,25 +10,25 @@ public class CameraController : MonoBehaviour
     [SerializeField] private InputActionReference rotate;
     [SerializeField] private InputActionReference look;
 
-    private float mouseScrollY;
+    
+    private float zoomDelta;
     private float mouseX;
     private bool isMouseWheelPressed;
 
     private float rotationSpeed = 0.5f;
     private float zoomSpeed = 5f;
     private float minZoom = 2f;
-    private float maxZoom = 10f;
+    private float maxZoom = 20f;
     private float currentZoom = 5f;
 
     private void Awake()
     {
         // Bind to actions
-        zoom.action.performed += x => mouseScrollY = x.ReadValue<float>();
+        zoom.action.performed += x => zoomDelta = x.ReadValue<float>();
         look.action.performed += x =>
         {
             if (isMouseWheelPressed) // Only update mouseX if middle mouse is pressed
                 mouseX = x.ReadValue<float>();
-            Debug.Log("I am pressed");
         };
         rotate.action.started += _ => isMouseWheelPressed = true;
         rotate.action.canceled += _ => {
@@ -75,7 +75,12 @@ public class CameraController : MonoBehaviour
 
     void HandleZoom()
     {
-        currentZoom -= mouseScrollY * zoomSpeed;
-        currentZoom = Mathf.Clamp(currentZoom, minZoom, maxZoom);
+        if (zoomDelta != 0)
+        {
+            currentZoom -= zoomDelta * zoomSpeed * Time.deltaTime;
+            currentZoom = Mathf.Clamp(currentZoom, minZoom, maxZoom);
+
+            zoomDelta = 0;
+        }
     }
 }

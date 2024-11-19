@@ -12,36 +12,70 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputActionReference speakForBlue;
     [SerializeField] private InputActionReference speakForRed;
 
+    [SerializeField] private GameObject red;
+    [SerializeField] private GameObject blue;
+
+    [SerializeField] private Animator animator;
+
     private float lookRotationSpeed = 8f;
+
+    public bool isSpeaking = false;
 
     private void Awake()
     {
+        animator = GetComponent<Animator>();
         agent = gameObject.GetComponent<NavMeshAgent>();
     }
+    private void Update()
+    {
+        FaceTarget();
+    }
 
+    #region Manage Subscription
     private void OnEnable()
     {
         move.action.performed += OnMovePerformed;
         move.action.Enable();
 
         speak.action.performed += OnSpeechPerformed;
+        speak.action.Enable();
+
+        speakForBlue.action.performed += BlueSpeechPerformed;
+        speakForBlue.action.canceled += BlueSpeechCanceled;
+        speakForBlue.action.Enable();
+
+        speakForRed.action.performed += RedSpeechPerformed;
+        speakForRed.action.canceled += RedSpeechCanceled;
+        speakForRed.action.Enable();
     }
 
     private void OnDisable()
     {
         move.action.performed -= OnMovePerformed;
         move.action.Disable();
-    }
 
-    private void Update()
-    {
-        FaceTarget();
+        speak.action.performed -= OnSpeechPerformed;
+        speak.action.Disable();
+
+        speakForBlue.action.performed -= BlueSpeechPerformed;
+        speakForBlue.action.canceled -= BlueSpeechCanceled;
+        speakForBlue.action.Disable();
+
+        speakForRed.action.performed -= RedSpeechPerformed;
+        speakForRed.action.canceled -= RedSpeechCanceled;
+        speakForRed.action.Disable();
     }
+    #endregion
 
     #region Move
     private void OnMovePerformed(InputAction.CallbackContext ctx)
     {
-        Move(); // Call Move() when the left mouse button is clicked
+        if (!isSpeaking) //Check if the Player is Speaking, aka has clicked on Space
+        {
+
+            Move(); // Call Move() when the left mouse button is clicked
+
+        }
     }
 
     private void Move()
@@ -72,6 +106,10 @@ public class PlayerController : MonoBehaviour
 
     private void FaceTarget()
     {
+
+        if (isSpeaking || !agent.hasPath)
+            return;
+
         if (agent.hasPath)
         {
             Vector3 direction = (agent.steeringTarget - transform.position).normalized;
@@ -91,11 +129,114 @@ public class PlayerController : MonoBehaviour
 
     private void OnSpeechPerformed(InputAction.CallbackContext ctx)
     {
-        //disable movement
-        //switch player prefab to prefab of player on box
-
-        //if released switch back to normal player 
+        if (isSpeaking)
+        {
+            StopSpeak();
+            StopSpeech();
+        }
+        else
+        {
+            Speak();
+        }
     }
 
+    private void BlueSpeechPerformed(InputAction.CallbackContext ctx)
+    {
+        if (isSpeaking)
+        {
+            BlueSpeech();
+        }
+    }
+
+    private void BlueSpeechCanceled(InputAction.CallbackContext ctx)
+    {
+        if (isSpeaking)
+        {
+            Debug.Log("Stopped Speaking for Blue");
+            animator.SetBool("IsSpeaking", false);
+            blue.SetActive(false);
+        }
+    }
+
+    private void RedSpeechPerformed(InputAction.CallbackContext ctx)
+    {
+        if (isSpeaking)
+        {
+            RedSpeech();
+        }
+    }
+
+    private void RedSpeechCanceled(InputAction.CallbackContext ctx)
+    {
+        if (isSpeaking)
+        {
+            Debug.Log("Stopped Speaking for Red");
+            animator.SetBool("IsSpeaking", false);
+            red.SetActive(false);
+        }
+    }
+
+    private void Speak()
+    {
+        Debug.Log("I am speaking");
+
+        //Disable Player Movement
+        isSpeaking = true;
+        agent.ResetPath();
+
+        //Lock Rotation
+        agent.updateRotation = false;
+        Vector3 forwardDirection = transform.forward;   
+        transform.rotation = Quaternion.LookRotation(forwardDirection);
+
+        //Start Animation On Box
+
+        animator.SetBool("IsBox", true);
+
+
+    }
+
+    private void StopSpeak()
+    {
+        Debug.Log("Stopped speaking");
+
+        //Enable Player Movement
+        isSpeaking = false;
+
+        //Unlock Rotation
+        agent.updateRotation = true;
+
+        //Stop Animation On Box
+
+        animator.SetBool("IsBox", false);
+    }
+
+    private void BlueSpeech()
+    {
+        Debug.Log("Start Speaking for Blue");
+
+        animator.SetBool("IsSpeaking", true);
+
+        blue.SetActive(true);
+        red.SetActive(false);
+    }
+
+    private void RedSpeech()
+    {
+        Debug.Log("Start Speaking for Red");
+
+        animator.SetBool("IsSpeaking", true);
+
+        red.SetActive(true);
+        blue.SetActive(false);
+    }
+
+    private void StopSpeech()
+    {
+        animator.SetBool("IsSpeaking", false );
+
+        red.SetActive(false);
+        blue.SetActive(false);
+    }
     #endregion
 }
