@@ -278,9 +278,13 @@ MonoBehaviour:
   aggressionNPCsAttackFull: 0
   disapprovalFull: 0
   aggressionPlayerAttackFull: 0
+  rendererNPC: {fileID: 0}
+  hueNPC: 0
   saturationNPC: 0
+  valueNPC: 0
   isblue: 0
   isred: 0
+  speechTime: 0
 --- !u!1 &345150457
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,9 +485,13 @@ MonoBehaviour:
   aggressionNPCsAttackFull: 0
   disapprovalFull: 0
   aggressionPlayerAttackFull: 0
+  rendererNPC: {fileID: 0}
+  hueNPC: 0
   saturationNPC: 0
+  valueNPC: 0
   isblue: 0
   isred: 0
+  speechTime: 0
 --- !u!1 &647972604
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,11 +599,14 @@ MonoBehaviour:
   aggressionNPCsAttackFull: 0
   disapprovalFull: 0
   aggressionPlayerAttackFull: 0
+  rendererNPC: {fileID: 0}
+  hueNPC: 0
   saturationNPC: 0
+  valueNPC: 0
   isblue: 0
   isred: 0
-  slider: {fileID: 647972606}
   speechTime: 0
+  slider: {fileID: 647972606}
   nextLevelLeftBar: 0
   nextLevelRightBar: 0
 --- !u!1 &1215047306
