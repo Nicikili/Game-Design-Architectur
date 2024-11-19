@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class NPCred : NPCManager
 {
-	private void Start()
+	private void Awake()
 	{
-		isred = true;
-		saturationNPC= Mathf.Lerp(0, 100, speechTime);
+		isRed = true;
+	}
+
+
+
+	void changeHue()
+	{
 		rendererNPC.material.color = Color.HSVToRGB(hueNPC = 0, saturationNPC = 0, valueNPC = 100);
 	}
 }

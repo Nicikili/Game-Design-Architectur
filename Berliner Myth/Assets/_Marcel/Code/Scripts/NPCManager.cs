@@ -14,49 +14,77 @@ public class NPCManager : MonoBehaviour
 	public bool aggressionPlayerAttackFull = false; //checks if second bar on NPC is Full (left side)
 
 	public Renderer rendererNPC;
-	public float hueNPC;
+	public float hueNPC = 0;
 	public float saturationNPC = 0;
-	public float valueNPC;
-	public bool isblue = false;
-	public bool isred = false;
+	public float valueNPC = 0;
+	public bool isBlue = false;
+	public bool isRed = false;
 
-	public float speechTime = 0f; //how long the NPC has been listening
+	public bool speechRed = false;
+	public bool speechBlue = false;
+	public float Approval = 0f; //how long the NPC has been listening
 	#endregion
 
-	public void Awake()
+	public void Start()
 	{
 		rendererNPC = GetComponent<Renderer>();
+		rendererNPC.material.color = Color.HSVToRGB(hueNPC, saturationNPC, valueNPC);
 	}
-
 
 	void Update()
 	{
-		ListensToSpeech();
-		Debug.Log(speechTime);
+		if (isListening)
+		{
+			ListensToSpeech();
+		}
 	}
 	void ListensToSpeech()
 	{
-		if (isListening && isred)
+		if (isListening && isRed && speechRed)
 		{
-			Debug.Log("Hello");
-			rendererNPC.material.color = Color.HSVToRGB(hueNPC = 0, saturationNPC = Mathf.Lerp(0, 100, speechTime), valueNPC = 100);
-
-			speechTime += 0.375f * Time.deltaTime;
+			Approval += 1 * Time.deltaTime;
 		}
 
-		if (isblue)
+		if (isListening && isRed && speechBlue)
 		{
-			rendererNPC.material.color = Color.HSVToRGB(hueNPC = 242, saturationNPC = 100, valueNPC = 100);
+			Approval -= 1 * Time.deltaTime;
+		}
+
+		if (isListening && isBlue && speechBlue)
+		{
+			Approval += 1 * Time.deltaTime;
+		}
+
+		if (isListening && isBlue && speechRed)
+		{
+			Approval -= 1 * Time.deltaTime;
 		}
 	}
 
 	public void BehavoirChange()
 	{
-		if (aggressionNPCsAttackFull)
+		// start following
+		if (Approval == 100)
+		{
+
+		}
+
+		// start attacking isBlue/isRed
+		if (Approval == 200)
+		{
+
+		}
+
+		//
+		if (Approval == -100)
+		{
+
+		}
+
+		//start attacking the Player
+		if (Approval == -200)
 		{
 
 		}
 	}
-
-
 }
