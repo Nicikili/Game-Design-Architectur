@@ -1,8 +1,10 @@
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
+[SelectionBase]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent agent;
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private float lookRotationSpeed = 8f;
 
     public bool isSpeaking = false;
+    public bool startSpeech = false;
 
     private void Awake()
     {
@@ -137,6 +140,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             Speak();
+
         }
     }
 
@@ -155,6 +159,8 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Stopped Speaking for Blue");
             animator.SetBool("IsSpeaking", false);
             blue.SetActive(false);
+
+            startSpeech =false;
         }
     }
 
@@ -173,6 +179,8 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Stopped Speaking for Red");
             animator.SetBool("IsSpeaking", false);
             red.SetActive(false);
+
+            startSpeech = false;
         }
     }
 
@@ -219,6 +227,8 @@ public class PlayerController : MonoBehaviour
 
         blue.SetActive(true);
         red.SetActive(false);
+
+        startSpeech = true;
     }
 
     private void RedSpeech()
@@ -229,6 +239,8 @@ public class PlayerController : MonoBehaviour
 
         red.SetActive(true);
         blue.SetActive(false);
+
+        startSpeech = true;
     }
 
     private void StopSpeech()
@@ -237,6 +249,8 @@ public class PlayerController : MonoBehaviour
 
         red.SetActive(false);
         blue.SetActive(false);
+
+        startSpeech = false;
     }
     #endregion
 }

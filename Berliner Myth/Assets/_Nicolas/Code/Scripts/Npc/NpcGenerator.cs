@@ -7,6 +7,7 @@ public class NpcGenerator : MonoBehaviour
     [SerializeField] NpcController NPCPrefab;
     [SerializeField] Area Area;
     [SerializeField] int Count = 15;
+    [SerializeField] NpcGroupManager npcGroupManager;
 
     private void Start()
     {
@@ -18,6 +19,8 @@ public class NpcGenerator : MonoBehaviour
             NpcController npc = Instantiate(NPCPrefab, position, rotation);
 
             npc.GetComponent<NpcWander>().Area = Area;
+
+            npcGroupManager.AddNpcToGroup(npc);
         }
     }
 
