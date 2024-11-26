@@ -13,6 +13,6 @@ public class NPCblue : NPCManager
 
 	void changeHue()
 	{
-		rendererNPC.material.color = Color.HSVToRGB(hueNPC = 242, saturationNPC = 0, valueNPC = 100);
+		//rendererNPC.material.color = Color.HSVToRGB(hueNPC = 242, saturationNPC = 0, valueNPC = 100);
 	}
 }

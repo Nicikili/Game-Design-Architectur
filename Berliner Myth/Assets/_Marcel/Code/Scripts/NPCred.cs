@@ -13,6 +13,6 @@ public class NPCred : NPCManager
 
 	void changeHue()
 	{
-		rendererNPC.material.color = Color.HSVToRGB(hueNPC = 0, saturationNPC = 0, valueNPC = 100);
+		//rendererNPC.material.color = Color.HSVToRGB(hueNPC = 0, saturationNPC = 0, valueNPC = 100);
 	}
 }

@@ -2,44 +2,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
-/*
-[RequireComponent(typeof(Slider))]
-public class NPCBar : NPCManager
+
+public class NPCBar : MonoBehaviour
 {
 #region
-public Slider slider;
+	public Slider slider;
+	public float approvalPoints;
 
-public bool nextLevelLeftBar;
-public bool nextLevelRightBar;
+	public bool isRed; //Political allignement of NPC is red.
+	public bool isBlue; //Political allignement of NPC is blue.
+
+	public bool redSpeech; //Player speech is red.
+	public bool blueSpeech; //Player speech is blue.
 #endregion
 
-void Start()
-{
-
-}
-
-// Update is called once per frame
 void ListensToSpeechRed()
 {
 
-	isListening = true;
-	slider.value = Mathf.Lerp(slider.minValue, slider.maxValue, speechTime);
+	//slider.value = Mathf.Lerp(slider.minValue, slider.maxValue, approvalPoints);
 
-	speechTime += 0.375f * Time.deltaTime; //how fast the bar fills while listening
+	//approvalPoints += 0.375f * Time.deltaTime; //how fast the bar fills while listening
 }
 
 void ListensToSpeech()
 {
+		slider.value = Mathf.Lerp(slider.maxValue, slider.minValue, approvalPoints);
 
-	slider.value = Mathf.Lerp(slider.maxValue, slider.minValue, speechTime);
+		//slider.value = Mathf.Lerp(slider.maxValue, slider.minValue, approvalPoints);
 
-	speechTime += 0.375f * Time.deltaTime; //how fast the bar fills while listening
-}
+
+		//approvalPoints += 0.375f * Time.deltaTime; //how fast the bar fills while listening
+	}
+
+	void ApprovalUpDown()
+	{
+		if (isRed)
+		{
+
+		}
+
+		if (isBlue)
+		{
+
+		}
+	}
+
+
 
 void ResetSlider()
 {
 	slider.value = slider.minValue;
 }
 }
-*/

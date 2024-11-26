@@ -13,7 +13,7 @@ public class NPCManager : MonoBehaviour
 	public bool disapprovalFull = false; //checks if first bar on NPC is Full (left side)
 	public bool aggressionPlayerAttackFull = false; //checks if second bar on NPC is Full (left side)
 
-	public Renderer rendererNPC;
+	//public Renderer rendererNPC;
 	public float hueNPC = 0;
 	public float saturationNPC = 0;
 	public float valueNPC = 0;
@@ -27,8 +27,8 @@ public class NPCManager : MonoBehaviour
 
 	public void Start()
 	{
-		rendererNPC = GetComponent<Renderer>();
-		rendererNPC.material.color = Color.HSVToRGB(hueNPC, saturationNPC, valueNPC);
+		//rendererNPC = GetComponent<Renderer>();
+		//rendererNPC.material.color = Color.HSVToRGB(hueNPC, saturationNPC, valueNPC);
 	}
 
 	void Update()
