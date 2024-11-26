@@ -80,7 +80,7 @@ public class NpcWander : NpcComponent
                     ChangeState(Estate.Wandering);
                 }
             }
-            else if (npc.controller.startSpeech && distanceToPlayer < maxDistanceToPlayer) //Go to the player doing the speech
+            else if (distanceToPlayer < maxDistanceToPlayer) //Go to the player doing the speech
             {
                 ChangeState(Estate.Gathering);
             }
@@ -109,7 +109,7 @@ public class NpcWander : NpcComponent
                     ChangeState(Estate.Waiting);
                 }
             }
-            else if (npc.controller.startSpeech && distanceToPlayer < maxDistanceToPlayer)
+            else if (distanceToPlayer < maxDistanceToPlayer)
             {
                 ChangeState(Estate.Gathering);
             }
@@ -201,3 +201,5 @@ public class NpcWander : NpcComponent
 }
 
 //Reminder - pusher to get a path through people
+
+//Reminder - Update NavMesh to get colliders always fresh

@@ -5,7 +5,6 @@ using UnityEngine;
 public class NpcStats : NpcComponent
 {
 
-    public bool isBlue = true;
 
     //punch stuff
     private float hitpoints = 10f;

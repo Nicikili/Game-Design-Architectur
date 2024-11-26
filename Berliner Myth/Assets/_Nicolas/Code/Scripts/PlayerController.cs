@@ -1,3 +1,4 @@
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
@@ -139,6 +140,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             Speak();
+
         }
     }
 
