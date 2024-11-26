@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.ProBuilder.MeshOperations;
 
 public class NpcWander : NpcComponent
 {
@@ -10,20 +7,28 @@ public class NpcWander : NpcComponent
 
     [SerializeField] float maxWaitTime = 3f;
     [SerializeField] float maxWaitTimeRandom = 5f;
-   
-    float maxWanderTime = 5f;
+
+    [SerializeField] float maxWanderTime = 5f;
+    [SerializeField] float maxWanderTimeRandom = 7f;
 
     enum Estate
     {
         Wandering,
         Waiting,
         Gathering,
-        Listening
+        Listening,
+        Following,
+        AttackingOthers,
+        AttackingPlayer
     }
 
     [SerializeField] Estate state = Estate.Wandering;
     [SerializeField] private float waitTime = 0f;
-    [SerializeField] private float wanderTime = 0f; 
+    [SerializeField] private float wanderTime = 0f;
+
+    [SerializeField] private float maxDistanceToPlayer = 10f;
+
+   
 
     private void Start()
     {
@@ -39,48 +44,92 @@ public class NpcWander : NpcComponent
 
     private void Update()
     {
-        if (state == Estate.Waiting)
+        //if (approval<=0)
+        //{
+        //    //go aggro against player
+        //}
+        //else if (approval>0.0f && approval<=100f)
+        //} //Standart NPC Behavior
+        //else if (approval>100f && approval<200) // NPC Follow Mode
+        //{
+        //    //follow player
+        //}
+        //else if (approval>=200f) // NPC Attacking mode
+        //{
+        //    //attack other npcs
+        //}
+        //else
+        //{
+        //    Debug.Log("Where is the approval AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH !!!!!!");
+        //}
+
+        float distanceToPlayer = Vector3.Distance(transform.position, PlayerArea.transform.position);
+
+        if (distanceToPlayer < maxDistanceToPlayer)
+        {
+            Debug.DrawLine(transform.position, PlayerArea.transform.position, Color.red);
+        }
+
+        if (state == Estate.Waiting) //// Waits around
         {
             waitTime -= Time.deltaTime;
-            if (!npc.controller.isSpeaking)
+            if (!npc.controller.startSpeech) //If player is not doing a Speech continue by wandering around
             {
-
                 if (waitTime < 0f)
                 {
                     ChangeState(Estate.Wandering);
                 }
             }
-            else
-            {
-                ChangeState (Estate.Gathering);
-            }
-        }
-        else if (state == Estate.Listening)
-        {
-            if (!npc.controller.isSpeaking)
-            {
-                ChangeState (Estate.Wandering);
-            }
-        }
-        else if (state == Estate.Wandering)
-        {
-            if (!npc.controller.isSpeaking)
-            {
-                if (HasArrived() || wanderTime < 0f)
-                {
-                    ChangeState(Estate.Waiting);
-                }
-            }
-            else
+            else if (npc.controller.startSpeech && distanceToPlayer < maxDistanceToPlayer) //Go to the player doing the speech
             {
                 ChangeState(Estate.Gathering);
             }
         }
-        else if (state == Estate.Gathering)
+        else if (state == Estate.Listening) //// Listen the Speech
         {
-            if (HasArrived() || wanderTime < 0f)
+            if (!npc.controller.startSpeech) // If player stops the Speech go back to wandering 4/5 or waiting 1/5
             {
-                ChangeState(Estate.Listening);
+                if (Random.Range(0f, 100.0f) > 20f)
+                {
+                    ChangeState(Estate.Wandering);
+                }
+                else
+                {
+                    ChangeState(Estate.Waiting);
+                }
+            }
+        }
+        else if (state == Estate.Wandering) //// Wander around
+        {
+            wanderTime -= Time.deltaTime;
+            if (!npc.controller.startSpeech)
+            {
+                if (HasArrived() || wanderTime < 0f) // If has arrived at told location or wandered around for too long change to waiting
+                {
+                    ChangeState(Estate.Waiting);
+                }
+            }
+            else if (npc.controller.startSpeech && distanceToPlayer < maxDistanceToPlayer)
+            {
+                ChangeState(Estate.Gathering);
+            }
+        }
+        else if (state == Estate.Gathering) //// Go towards the player if near her
+        {
+            if (HasArrived()) //If arrives at the player position
+            {
+                ChangeState(Estate.Listening); // change to listening
+            }
+            if (!npc.controller.startSpeech) //If player stops the speech cancel path going towards the player
+            {
+                if (Random.Range(0f, 100.0f) > 20f) //Tells npc to go wandering 4/5 or waiting 1/5
+                {
+                    ChangeState(Estate.Wandering);
+                }
+                else
+                {
+                    ChangeState(Estate.Waiting);
+                }
             }
         }
     }
@@ -95,11 +144,11 @@ public class NpcWander : NpcComponent
 
             SetRandomDestination();
 
-            wanderTime = maxWanderTime;
+            wanderTime = maxWanderTime + Random.Range(0f, maxWanderTimeRandom);
         }
         else if (state == Estate.Listening)
         {
-            npc.agent.isStopped = true; 
+            npc.agent.isStopped = true;
         }
         else if (state == Estate.Waiting)
         {
@@ -113,7 +162,26 @@ public class NpcWander : NpcComponent
 
             SetPlayerDestination();
         }
-          
+        else if (state == Estate.Following)
+        {
+            npc.agent.isStopped = false;
+            //Npc goes into follow mode, following the player, set destination to players destination
+        }
+        else if (state == Estate.AttackingOthers)
+        {
+            npc.agent.isStopped = false;
+            //Violence mode activated, Npc will attack other Npc
+            //Set destination towards closest npc
+            //punches each npc thats opposite of itself
+        }
+        else if (state == Estate.AttackingPlayer)
+        {
+            npc.agent.isStopped = false;
+
+            //Set desintation towards player
+            //Goes into Violence mode against player
+        }
+
     }
 
     bool HasArrived()
@@ -132,4 +200,4 @@ public class NpcWander : NpcComponent
     }
 }
 
-//Reminder - unstuck over time when not reached destination - do not gather when not speaking - if stop speaking go directly to new waypoint - pusher to get a path through people
+//Reminder - pusher to get a path through people
