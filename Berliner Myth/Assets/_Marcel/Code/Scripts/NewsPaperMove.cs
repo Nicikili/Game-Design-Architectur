@@ -20,7 +20,7 @@ public class NewsPaperMove : MonoBehaviour
         
     }
 
-    // Update is called once per frame
+    // Update is called once per frame.
     void Update()
     {
         NewspaperRotate();
@@ -29,14 +29,14 @@ public class NewsPaperMove : MonoBehaviour
     void NewspaperRotate()
 	{
 
-        transform.DORotate(new Vector3(0, 360, 0), 0.5f, RotateMode.FastBeyond360).SetRelative(true)
+        transform.DORotate(new Vector3(0, 360, 0), 0.5f, RotateMode.FastBeyond360).SetRelative(true) //rotates the newspaper.
             .SetEase(Ease.Linear).SetLoops(-1);
 
-        transform.DOMoveY(endPos, endPosTime, snapping).SetEase(newsPaperAnimationCurve);
+        transform.DOMoveY(endPos, endPosTime, snapping).SetEase(newsPaperAnimationCurve); //moves the newspaper to front.
 
         Debug.Log(transform.position.y);
 
-       if (transform.position.y > 5)
+       if (transform.position.y > 5) //if the newspaper reached a certain point, it will switch out with the new newspapperSlapped GameObject.
         {
            NewspaperSlapped.SetActive(true);
            Newspaper.SetActive(false);
