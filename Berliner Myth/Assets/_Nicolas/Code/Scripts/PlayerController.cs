@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     public bool isSpeaking = false;
     public bool startSpeech = false;
+    public string activeSpeechGroup = "None"; 
 
     private void Awake()
     {
@@ -219,7 +220,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsBox", false);
     }
 
-    private void BlueSpeech()
+    public void BlueSpeech()
     {
         Debug.Log("Start Speaking for Blue");
 
@@ -229,9 +230,11 @@ public class PlayerController : MonoBehaviour
         red.SetActive(false);
 
         startSpeech = true;
+
+        activeSpeechGroup = "Blue";
     }
 
-    private void RedSpeech()
+    public void RedSpeech()
     {
         Debug.Log("Start Speaking for Red");
 
@@ -241,9 +244,11 @@ public class PlayerController : MonoBehaviour
         blue.SetActive(false);
 
         startSpeech = true;
+
+        activeSpeechGroup = "Red";
     }
 
-    private void StopSpeech()
+    public void StopSpeech()
     {
         animator.SetBool("IsSpeaking", false );
 
@@ -251,6 +256,8 @@ public class PlayerController : MonoBehaviour
         blue.SetActive(false);
 
         startSpeech = false;
+
+        activeSpeechGroup = "None";
     }
     #endregion
 }

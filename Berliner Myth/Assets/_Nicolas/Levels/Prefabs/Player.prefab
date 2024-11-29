@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7818289129919924166}
-  - component: {fileID: 4324864653950818439}
   m_Layer: 0
   m_Name: SpeechArea
   m_TagString: Player
@@ -32,19 +31,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3098937481595778588}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4324864653950818439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1182497290090311220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeb3959d3f6c34449a053accc4c6cc59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Radius: 7
 --- !u!1 &1714178798357509633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1704,6 +1690,7 @@ MonoBehaviour:
   animator: {fileID: 308655236114881019}
   isSpeaking: 0
   startSpeech: 0
+  activeSpeechGroup: None
 --- !u!120 &6584747057929909417
 LineRenderer:
   serializedVersion: 2

@@ -1,18 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Unity.AI.Navigation;
-using System;
+using UnityEngine;
 
 public class SceneManager : MonoBehaviour
 {
     [SerializeField] private NavMeshSurface navMeshSurface;
+    [SerializeField] private float updateInterval = 2f;
 
+    private float timer;
 
-
-    private void Update()
+    public void Start()
     {
-        navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData);
+        if (navMeshSurface == null)
+        {
+            navMeshSurface = GetComponent<NavMeshSurface>();
+        }
+    }
 
+    public void Update()
+    {
+        timer += Time.deltaTime;
+
+        if (timer >= updateInterval)
+        {
+            UpdateNavMesh();
+            timer = 0f;
+        }
+    }
+
+    public void UpdateNavMesh()
+    {
+        if (navMeshSurface != null)
+        {
+            navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData);
+        }
     }
 }
