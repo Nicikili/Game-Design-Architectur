@@ -38,4 +38,9 @@ public class NpcGroupManager : MonoBehaviour
         }
 
     }
+
+    public Group GetGroupByName(string groupName)
+    {
+        return groups.Find(group => group.groupName == groupName);
+    }
 }
