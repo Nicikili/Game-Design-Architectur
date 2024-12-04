@@ -58,5 +58,5 @@ public class NpcCombat : NpcComponent
     {
         Destroy(gameObject);
     }
-   
+
 }

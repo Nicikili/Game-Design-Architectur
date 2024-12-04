@@ -20,7 +20,7 @@ public class NpcController : MonoBehaviour
     public float Approval { get; private set; } = 100f; // Neutral starting value (range 0 - 200)
 
     public float CurrentHealth { get; set; }
-    [SerializeField] private float maxHealth = 100f;
+    [SerializeField] private float maxHealth = 50f;
     public float MaxHealth => maxHealth;
 
     private Camera mainCamera;
@@ -57,6 +57,26 @@ public class NpcController : MonoBehaviour
             renderer.material.color = groupColor;
         }
     }
+
+    public void SwitchGroup(string newGroupName)
+    {
+        NpcGroupManager groupManager = FindObjectOfType<NpcGroupManager>();
+
+        if (groupManager != null)
+        {
+            NpcGroupManager.Group currentGroup = groupManager.GetGroupByName(GroupName);
+            if (currentGroup != null)
+            {
+                currentGroup.members.Remove(this);
+            }
+
+            groupManager.AddNpcToGroup(this);
+
+            GroupName = newGroupName;
+
+        }
+    }
+
 
     public void AdjustApproval(float amount)
     {

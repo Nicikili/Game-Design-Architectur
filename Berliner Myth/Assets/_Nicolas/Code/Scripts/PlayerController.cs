@@ -19,6 +19,11 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Animator animator;
 
+    [SerializeField] private float maxHealth = 100f;
+    private float currentHealt;
+    public bool isPlayerAttacked = false;
+
+
     private float lookRotationSpeed = 8f;
 
     public bool isSpeaking = false;
@@ -260,4 +265,23 @@ public class PlayerController : MonoBehaviour
         activeSpeechGroup = "None";
     }
     #endregion
+
+    public void PlayerTakenDamage(float damage)
+    {
+        currentHealt =- damage;
+        currentHealt = Mathf.Clamp(currentHealt, 0, maxHealth);
+
+        if (currentHealt <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
+
+        Debug.Log("you have died");
+        
+    }
 }
