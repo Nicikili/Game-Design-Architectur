@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - MoveToPaper
+  - MoveToMain
+  - MoveToOptions
+  - MoveToDevs
+  - MoveToMusican
   layers:
   - Default
   - TransparentFX
@@ -12,7 +17,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - MoveToPaper
   - 
   - 
   - 
