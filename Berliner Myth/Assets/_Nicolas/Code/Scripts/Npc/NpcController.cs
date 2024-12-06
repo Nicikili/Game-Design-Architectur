@@ -14,14 +14,16 @@ public class NpcController : MonoBehaviour
 
     public PlayerController controller;
 
+    public NpcController LastAttacker {  get; private set; }    
+
     public string GroupName { get; private set; } 
     public Color GroupColor { get; private set; }
 
     public float Approval { get; private set; } = 100f; // Neutral starting value (range 0 - 200)
 
     public float CurrentHealth { get; set; }
+
     [SerializeField] private float maxHealth = 50f;
-    public float MaxHealth => maxHealth;
 
     private Camera mainCamera;
 
@@ -70,9 +72,16 @@ public class NpcController : MonoBehaviour
                 currentGroup.members.Remove(this);
             }
 
-            groupManager.AddNpcToGroup(this);
-
-            GroupName = newGroupName;
+            NpcGroupManager.Group newGroup = groupManager.GetGroupByName(newGroupName);
+            if (newGroup != null)
+            {
+                newGroup.members.Add(this);
+                SetGroup(newGroupName, newGroup.groupColor);
+            }
+            else
+            {
+                GroupName = newGroupName;
+            }
 
         }
     }
@@ -83,9 +92,14 @@ public class NpcController : MonoBehaviour
         Approval = Mathf.Clamp(Approval + amount, 0f, 200f); // Keep Approval between 0 and 200
     }
 
-    public void TakenDamage(float damage)
+    public void TakenDamage(float damage, NpcController attacker)
     {
         CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
+
+        if (attacker != null)
+        {
+            LastAttacker = attacker; //store the attacker
+        }
 
         if (CurrentHealth <= 0f)
         {

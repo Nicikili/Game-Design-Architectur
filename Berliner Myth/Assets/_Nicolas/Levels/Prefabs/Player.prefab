@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7818289129919924166}
+  - component: {fileID: 395015647188265746}
   m_Layer: 0
   m_Name: SpeechArea
   m_TagString: Player
@@ -24,13 +25,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182497290090311220}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3098937481595778588}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &395015647188265746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182497290090311220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 836f40dec6bd7ad40a802556062975d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InnerRadius: 2
+  OuterRadius: 7
+  Angle: 180
 --- !u!1 &1714178798357509633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1591,6 +1607,7 @@ GameObject:
   - component: {fileID: 3098937481595778588}
   - component: {fileID: 200923646087146063}
   - component: {fileID: 9096789750351289305}
+  - component: {fileID: 1314268379647897499}
   - component: {fileID: 1047130197356390033}
   - component: {fileID: 6584747057929909417}
   - component: {fileID: 308655236114881019}
@@ -1651,10 +1668,10 @@ NavMeshAgent:
   m_GameObject: {fileID: 8485216173188709264}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.6
   m_Speed: 3.5
   m_Acceleration: 8
-  avoidancePriority: 50
+  avoidancePriority: 99
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
@@ -1664,6 +1681,22 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!208 &1314268379647897499
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8485216173188709264}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.6, y: 1, z: 0.6}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!114 &1047130197356390033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1677,6 +1710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 9096789750351289305}
+  obstacle: {fileID: 1314268379647897499}
   clickEffect: {fileID: 2483925704559625351, guid: 20a5b906fe11d834da93b4e57c1e7b5a,
     type: 3}
   move: {fileID: -6129945139549027879, guid: 9872429b94b1b2644825cc9b209810b3, type: 3}
@@ -1688,6 +1722,8 @@ MonoBehaviour:
   red: {fileID: 2232647087428762248}
   blue: {fileID: 3101648081221912654}
   animator: {fileID: 308655236114881019}
+  maxHealth: 100
+  isPlayerAttacked: 0
   isSpeaking: 0
   startSpeech: 0
   activeSpeechGroup: None

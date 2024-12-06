@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,6 +9,7 @@ using UnityEngine.UIElements;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private NavMeshObstacle obstacle;
     [SerializeField] private ParticleSystem clickEffect;
     [SerializeField] private InputActionReference move;
     [SerializeField] private InputActionReference speak;
@@ -34,10 +36,19 @@ public class PlayerController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         agent = gameObject.GetComponent<NavMeshAgent>();
+        obstacle = gameObject.GetComponent<NavMeshObstacle>();
+
+        if (agent != null ) { agent.enabled = true; }
+        if (obstacle != null) { obstacle.enabled = false; }
+
+        currentHealt = maxHealth;
     }
     private void Update()
     {
-        FaceTarget();
+        if (agent.enabled)
+        {
+            FaceTarget();
+        }
     }
 
     #region Manage Subscription
@@ -79,7 +90,7 @@ public class PlayerController : MonoBehaviour
     #region Move
     private void OnMovePerformed(InputAction.CallbackContext ctx)
     {
-        if (!isSpeaking) //Check if the Player is Speaking, aka has clicked on Space
+        if (!isSpeaking && agent.enabled) //Check if the Player is Speaking, aka has clicked on Space
         {
 
             Move(); // Call Move() when the left mouse button is clicked
@@ -198,6 +209,10 @@ public class PlayerController : MonoBehaviour
         isSpeaking = true;
         agent.ResetPath();
 
+        //Switch to NavMesh Obstacle
+        agent.enabled = false;
+        obstacle.enabled = true;
+
         //Lock Rotation
         agent.updateRotation = false;
         Vector3 forwardDirection = transform.forward;   
@@ -214,6 +229,10 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Stopped speaking");
 
+        //Switch to NavMesh Obstacle
+        obstacle.enabled = false;
+        StartCoroutine(EnableNavMeshAgentNextFrame()); //start coroutine to enable back the agent after 1 frame else the player would teleport around. 
+
         //Enable Player Movement
         isSpeaking = false;
 
@@ -223,6 +242,13 @@ public class PlayerController : MonoBehaviour
         //Stop Animation On Box
 
         animator.SetBool("IsBox", false);
+    }
+
+    private IEnumerator EnableNavMeshAgentNextFrame()
+    {
+        yield return null;
+
+        agent.enabled = true;
     }
 
     public void BlueSpeech()
@@ -266,6 +292,7 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    #region Health&Damage
     public void PlayerTakenDamage(float damage)
     {
         currentHealt =- damage;
@@ -279,9 +306,10 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
-        Destroy(gameObject);
+        //Handle screenchange to Player death Game Over TODO
 
         Debug.Log("you have died");
         
     }
+    #endregion
 }

@@ -1,5 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.Controls;
+using UnityEngine.AI;
+using UnityEngine.UI;
+
 
 public class NpcWander : NpcComponent
 {
@@ -39,7 +43,7 @@ public class NpcWander : NpcComponent
     [SerializeField] private float wanderTime = 0f;
     [SerializeField] private float aggroTime = 0f;
     [SerializeField] private float stuckTime = 0f;
-    
+
 
     [SerializeField] private float maxDistanceToPlayer = 10f;
 
@@ -89,7 +93,7 @@ public class NpcWander : NpcComponent
 
                 HandleAttackPlayer(); //attack Player
 
-                if (aggroTime < 0f) // if aggro Time passed cahnge approval
+                if (aggroTime < 0f) // if aggro Time passed change to random new state
                 {
                     float randomValue = Random.Range(0f, 100f);
 
@@ -106,6 +110,11 @@ public class NpcWander : NpcComponent
                         ChangeState(Estate.AttackingPlayer);
                     }
 
+                }
+
+                if (IsAttacked())
+                {
+                    ChangeState(Estate.AttackingAttacking);
                 }
             }
             else if (state == Estate.Wandering)
@@ -132,6 +141,11 @@ public class NpcWander : NpcComponent
                     }
                 }
 
+                if (IsAttacked())
+                {
+                    ChangeState(Estate.AttackingAttacking);
+                }
+
             }
             else if (state == Estate.Waiting)
             {
@@ -156,6 +170,11 @@ public class NpcWander : NpcComponent
                     }
                 }
 
+                if (IsAttacked())
+                {
+                    ChangeState(Estate.AttackingAttacking);
+                }
+
             }
             else if (state == Estate.Gathering)
             {
@@ -174,6 +193,11 @@ public class NpcWander : NpcComponent
                     {
                         ChangeState(Estate.Wandering);
                     }
+                }
+
+                if (IsAttacked())
+                {
+                    ChangeState(Estate.AttackingAttacking);
                 }
             }
             else if (state == Estate.Listening)
@@ -208,6 +232,35 @@ public class NpcWander : NpcComponent
                     }
                 }
 
+                if (IsAttacked())
+                {
+                    ChangeState(Estate.AttackingAttacking);
+                }
+
+            }
+            else if (state == Estate.AttackingAttacking)
+            {
+                aggroTime -= Time.deltaTime;
+
+                HandleAttackRetaliation();
+
+                if (aggroTime < 0f)
+                {
+                    float randomValue = Random.Range(0f, 100f);
+
+                    if (randomValue < 33f)
+                    {
+                        ChangeState(Estate.Wandering);
+                    }
+                    else if (randomValue < 66f)
+                    {
+                        ChangeState(Estate.Waiting);
+                    }
+                    else
+                    {
+                        ChangeState(Estate.AttackingPlayer);
+                    }
+                }
             }
             #endregion
         }
@@ -228,6 +281,11 @@ public class NpcWander : NpcComponent
                 if (waitTime < 0f) // switch back to wandering after waitTime has passed
                 {
                     ChangeState(Estate.Wandering);
+                }
+
+                if (IsAttacked())
+                {
+                    ChangeState(Estate.AttackingAttacking);
                 }
 
             }
@@ -262,6 +320,11 @@ public class NpcWander : NpcComponent
                         ChangeState(Estate.Convert);
                     }
                 }
+
+                if (IsAttacked())
+                {
+                    ChangeState(Estate.AttackingAttacking);
+                }
             }
             else if (state == Estate.Wandering) //// Wander around
             {
@@ -277,6 +340,11 @@ public class NpcWander : NpcComponent
                 if (HasArrived() || wanderTime < 0f) // If has arrived at told location or wandered around for too long change to waiting
                 {
                     ChangeState(Estate.Waiting);
+                }
+
+                if (IsAttacked())
+                {
+                    ChangeState(Estate.AttackingAttacking);
                 }
 
             }
@@ -298,6 +366,11 @@ public class NpcWander : NpcComponent
                     {
                         ChangeState(Estate.Waiting);
                     }
+                }
+
+                if (IsAttacked())
+                {
+                    ChangeState(Estate.AttackingAttacking);
                 }
             }
             else if (state == Estate.AttackingOthers || state == Estate.AttackingPlayer)
@@ -321,6 +394,31 @@ public class NpcWander : NpcComponent
                     hasArrived = false;
                 }
 
+                if (IsAttacked())
+                {
+                    ChangeState(Estate.AttackingAttacking);
+                }
+
+            }
+            else if (state == Estate.AttackingAttacking)
+            {
+                aggroTime -= Time.deltaTime;
+
+                HandleAttackRetaliation();
+
+                if (aggroTime < 0f)
+                {
+                    float randomValue = Random.Range(0f, 100f);
+
+                    if (randomValue < 50f)
+                    {
+                        ChangeState(Estate.Wandering);
+                    }
+                    else
+                    {
+                        ChangeState(Estate.Waiting);
+                    }
+                }
             }
 
             #endregion
@@ -348,6 +446,11 @@ public class NpcWander : NpcComponent
                 {
                     ChangeState(Estate.Following);
                 }
+
+                if (IsAttacked())
+                {
+                    ChangeState(Estate.AttackingAttacking);
+                }
             }
             else if (state == Estate.Following)
             {
@@ -358,6 +461,16 @@ public class NpcWander : NpcComponent
                 else // if player is not doing a speech
                 {
                     ChangeState(Estate.Following);
+                }
+
+                if (IsAttacked())
+                {
+                    ChangeState(Estate.AttackingAttacking);
+                }
+
+                if (IsPlayerAttacked())
+                {
+                    ChangeState(Estate.DefendPlayer);
                 }
 
             }
@@ -371,27 +484,45 @@ public class NpcWander : NpcComponent
                 }
                 else if (!HasArrived() && stuckTime < 0 || !npc.controller.startSpeech)
                 {
-                    ChangeState(Estate.Wandering);
+                    ChangeState(Estate.Following);
+                }
+
+                if (IsAttacked())
+                {
+                    ChangeState(Estate.AttackingAttacking);
                 }
 
             }
             else if (state == Estate.AttackingOthers || state == Estate.AttackingPlayer)
             {
-                if (Random.Range(0f, 100.0f) > 20f) //Tells npc to go wandering 4/5 or waiting 1/5
+                ChangeState(Estate.Following);
+            }
+            else if (state == Estate.AttackingAttacking)
+            {
+                aggroTime -= Time.deltaTime;
+
+                HandleAttackRetaliation();
+
+                if (aggroTime < 0f)
                 {
-                    ChangeState(Estate.Wandering);
+                    ChangeState(Estate.Following);
                 }
-                else
+            }
+            else if (state == Estate.DefendPlayer)
+            {
+                HandleAttackPlayerRetaliation();
+
+                if (!IsPlayerAttacked())
                 {
-                    ChangeState(Estate.Waiting);
+                    ChangeState(Estate.Following);
                 }
             }
             #endregion
         }
 
-        else if (npc.Approval >= 200f) // NPC Attacking mode
+        else if (npc.Approval >= 200f)
         {
- 
+            #region NPC Aggro Mode
             if (state == Estate.AttackingOthers)
             {
                 aggroTime -= Time.deltaTime;
@@ -402,7 +533,7 @@ public class NpcWander : NpcComponent
                 {
                     float randomValue = Random.Range(0f, 100f);
 
-                    if (randomValue < 25f) 
+                    if (randomValue < 25f)
                     {
                         ChangeState(Estate.Wandering);
                     }
@@ -445,6 +576,11 @@ public class NpcWander : NpcComponent
                     }
                 }
 
+                if (IsAttacked())
+                {
+                    ChangeState(Estate.AttackingAttacking);
+                }
+
             }
             else if (state == Estate.Waiting)
             {
@@ -469,6 +605,11 @@ public class NpcWander : NpcComponent
                     }
                 }
 
+                if (IsAttacked())
+                {
+                    ChangeState(Estate.AttackingAttacking);
+                }
+
             }
             else if (state == Estate.Following)
             {
@@ -480,10 +621,20 @@ public class NpcWander : NpcComponent
                 {
                     ChangeState(Estate.Following);
                 }
+
+                if (IsAttacked())
+                {
+                    ChangeState(Estate.AttackingAttacking);
+                }
+
+                if (IsPlayerAttacked())
+                {
+                    ChangeState(Estate.DefendPlayer);
+                }
             }
             else if (state == Estate.Gathering)
             {
-                stuckTime -= Time.deltaTime;   
+                stuckTime -= Time.deltaTime;
                 if (HasArrived()) //If arrives at the player position
                 {
                     ChangeState(Estate.Listening); // change to listening
@@ -498,6 +649,11 @@ public class NpcWander : NpcComponent
                     {
                         ChangeState(Estate.Wandering);
                     }
+                }
+
+                if (IsAttacked())
+                {
+                    ChangeState(Estate.AttackingAttacking);
                 }
             }
             else if (state == Estate.Listening)
@@ -536,7 +692,50 @@ public class NpcWander : NpcComponent
                     }
                 }
 
+                if (IsAttacked())
+                {
+                    ChangeState(Estate.AttackingAttacking);
+                }
+
             }
+            else if (state == Estate.AttackingAttacking)
+            {
+                aggroTime -= Time.deltaTime;
+
+                HandleAttackRetaliation();
+
+                if (aggroTime < 0f)
+                {
+                    float randomValue = Random.Range(0f, 100f);
+
+                    if (randomValue < 25f)
+                    {
+                        ChangeState(Estate.Wandering);
+                    }
+                    else if (randomValue < 50f)
+                    {
+                        ChangeState(Estate.Waiting);
+                    }
+                    else if (randomValue < 75f)
+                    {
+                        ChangeState(Estate.Following);
+                    }
+                    else
+                    {
+                        ChangeState(Estate.AttackingOthers);
+                    }
+                }
+            }
+            else if (state == Estate.DefendPlayer)
+            {
+                HandleAttackPlayerRetaliation();
+
+                if (!IsPlayerAttacked())
+                {
+                    ChangeState(Estate.Following);
+                }
+            }
+            #endregion
         }
         else
         {
@@ -596,17 +795,23 @@ public class NpcWander : NpcComponent
 
             HandleAttackPlayer();
         }
-        else if (state == Estate.AttackingAttacking) //TODO
-        {
-            npc.agent.isStopped = false;
-        }
-        else if (state == Estate.DefendPlayer) //TODO
+        else if (state == Estate.AttackingAttacking)
         {
             npc.agent.isStopped = false;
 
+            aggroTime = maxAggroTime + Random.Range(0f, maxAggroTimeRandom);
+
+            HandleAttackRetaliation();
+        }
+        else if (state == Estate.DefendPlayer)
+        {
+            npc.agent.isStopped = false;
+
+            HandleAttackPlayerRetaliation();
+
             //if player is attacked and npcs are following the following npc will attack the attacking npcs that are attacking the player
         }
-        else if (state == Estate.Convert) 
+        else if (state == Estate.Convert)
         {
             npc.agent.isStopped = false;
         }
@@ -616,6 +821,34 @@ public class NpcWander : NpcComponent
     bool HasArrived() //check if has arrived at destination point
     {
         return npc.agent.remainingDistance <= npc.agent.stoppingDistance;
+    }
+
+    bool IsAttacked()
+    {
+        if (npc.LastAttacker != null && npc.LastAttacker.GroupName != npc.GroupName) //ensure attacker is from the other group
+        {
+            NpcWander attackerWander = npc.LastAttacker.GetComponent<NpcWander>();
+
+            if (attackerWander != null && attackerWander.state == Estate.AttackingOthers)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    bool IsPlayerAttacked()
+    {
+        NpcController[] allNpcs = FindObjectsOfType<NpcController>();
+
+        foreach (NpcController npc in allNpcs)
+        {
+            NpcWander wanderScript = npc.GetComponent<NpcWander>();
+            if (wanderScript != null && wanderScript.state == Estate.AttackingPlayer)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     void SetRandomDestination() //set random destination point inside the move area
@@ -628,9 +861,24 @@ public class NpcWander : NpcComponent
         npc.agent.SetDestination(PlayerArea.GetRandomPoint());
     }
 
-    void SetPlayerDestination() //set destination towards the player
+    void SetPlayerDestination() //set destination towards near the player
     {
-        npc.agent.SetDestination(npc.player.transform.position);
+        Vector3 directionToPlayer = npc.player.transform.position - transform.position;
+        directionToPlayer.y = 0;
+
+        float followDistance = 2.0f;
+        Vector3 targetPosition = npc.player.transform.position - directionToPlayer.normalized * followDistance;
+
+        NavMeshHit hit;
+
+        if (NavMesh.SamplePosition(targetPosition, out hit, 3.0f, NavMesh.AllAreas))
+        {
+            npc.agent.SetDestination(hit.position);
+        }
+        else 
+        {
+            Debug.Log("Cannot follow Player");
+        }
     }
     private NpcController FindClosestNpc()  //search for Npc that's from another group an closest to it
     {
@@ -683,6 +931,48 @@ public class NpcWander : NpcComponent
         return furthestNpc;
     }
 
+    private List<NpcController> FindAttackerNpcs() //search for all Npcs that are from another group and are attacking
+    {
+        List<NpcController> targets = new List<NpcController>();
+        NpcController[] allNpcs = FindObjectsOfType<NpcController>(); //get all npcs in the scene
+
+        foreach (NpcController npcController in allNpcs)
+        {
+            if (npcController.GroupName != npc.GroupName)
+            {
+                NpcWander wanderComponent = npcController.GetComponent<NpcWander>();
+
+                if (wanderComponent != null && wanderComponent.state == Estate.AttackingOthers)
+                {
+                    targets.Add(npcController);
+                }
+            }
+        }
+
+        return targets;
+    }
+
+    private List<NpcController> FindAttackingPlayerNpcs()
+    {
+        List<NpcController> targets = new List<NpcController>();
+        NpcController[] allNpcs = FindObjectsOfType<NpcController>(); //get all npcs in the scene
+
+        foreach (NpcController npcController in allNpcs)
+        {
+            if (npcController.GroupName != npc.GroupName)
+            {
+                NpcWander wanderComponent = npcController.GetComponent<NpcWander>();
+
+                if (wanderComponent != null && wanderComponent.state == Estate.AttackingPlayer)
+                {
+                    targets.Add(npcController);
+                }
+            }
+        }
+
+        return targets;
+    }
+
     void HandleAttackOther()
     {
         if (targetNpc == null)
@@ -697,7 +987,7 @@ public class NpcWander : NpcComponent
 
             if (Vector3.Distance(npc.agent.transform.position, targetNpc.transform.position) <= 2f)
             {
-                targetNpc.TakenDamage(Time.deltaTime * 5);
+                targetNpc.TakenDamage(Time.deltaTime * 5, npc);
 
             }
         }
@@ -708,12 +998,54 @@ public class NpcWander : NpcComponent
         npc.agent.SetDestination(npc.player.transform.position);
 
         if (Vector3.Distance(npc.agent.transform.position, npc.player.transform.position) <= 2f)
-        {           
-            npc.controller.PlayerTakenDamage(Time.deltaTime * 5);       
+        {
+            npc.controller.PlayerTakenDamage(Time.deltaTime * 5);
         }
 
     }
 
+    void HandleAttackRetaliation()
+    {
+        List<NpcController> targets = FindAttackerNpcs();
+
+        if (targets.Count > 0)
+        {
+            targets.Sort((a, b) =>
+            {
+                float distanceA = Vector3.Distance(npc.transform.position, a.transform.position);
+                float distanceB = Vector3.Distance(npc.transform.position, b.transform.position);
+                return distanceA.CompareTo(distanceB);
+            });
+
+            npc.agent.SetDestination(targets[0].transform.position);
+
+            StartCoroutine(ApplyDamageAfterDelay(targets[0]));
+        }
+    }
+
+    void HandleAttackPlayerRetaliation()
+    {
+        List<NpcController> targets = FindAttackingPlayerNpcs();
+
+        if (targets.Count > 0)
+        {
+            int randomIndex = Random.Range(0, targets.Count);
+            npc.agent.SetDestination(targets[randomIndex].transform.position);
+
+            StartCoroutine(ApplyDamageAfterDelay(targets[randomIndex]));
+        }
+
+    }
+
+    private IEnumerator ApplyDamageAfterDelay(NpcController target)
+    {
+        yield return new WaitForSeconds(Random.Range(1f, 2f));
+
+        if (target != null && Vector3.Distance(npc.agent.transform.position, target.transform.position) <= 2f)
+        {
+            target.TakenDamage(Time.deltaTime * 5, npc);
+        }
+    }
 
     void GoConvert()
     {
@@ -748,7 +1080,5 @@ public class NpcWander : NpcComponent
 }
 
 //Reminder - pusher to get a path through people
-
-//Reminder - Update NavMesh to get colliders always fresh
 
 //TODO - Player attack and Npc Attack
