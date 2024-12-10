@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using TMPro;
 
 [SelectionBase]
 public class PlayerController : MonoBehaviour
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
     public bool isPlayerAttacked = false;
 
     [SerializeField] private Slider speechBar;
+    [SerializeField] private TextMeshProUGUI currentHealthValue;
     [SerializeField] private float maxSpeechDuration = 20f;
     [SerializeField] private float speechCoolDown = 2f;
     private float currentSpeechTime;
@@ -52,6 +54,8 @@ public class PlayerController : MonoBehaviour
 
         if (speechBar != null) { speechBar.maxValue = maxSpeechDuration; speechBar.value = maxSpeechDuration; }
 
+        currentSpeechTime = maxSpeechDuration;
+
     }
     private void Update()
     {
@@ -74,6 +78,8 @@ public class PlayerController : MonoBehaviour
         {
             RechargeSpeechBar();
         }
+
+        currentHealthValue.text = currentHealt.ToString("F0");
     }
 
     #region Manage Subscription
@@ -403,7 +409,7 @@ public class PlayerController : MonoBehaviour
         };
 
         // Display the overall percentage
-        GUI.Label(labelRect, $"Health: {currentHealt}%", BigStyle);
+        //GUI.Label(labelRect, $"Health: {currentHealt}%", BigStyle);
     }
 
 }

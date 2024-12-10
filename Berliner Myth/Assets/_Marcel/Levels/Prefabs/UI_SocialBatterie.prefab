@@ -152,10 +152,10 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343140261324613712}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.74999994, y: 0.74999994, z: 0.74999994}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4999621180489848703}
   - {fileID: 1884195810785506819}
@@ -216,7 +216,6 @@ GameObject:
   - component: {fileID: 7349422424203651447}
   - component: {fileID: 2913290097223575752}
   - component: {fileID: 7701740238553409162}
-  - component: {fileID: 2870884090912209668}
   m_Layer: 5
   m_Name: SocialBatterie_Frame
   m_TagString: Untagged
@@ -332,23 +331,3 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2870884090912209668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9002562477379580515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f655d3d57b8b38a4dac51579e8fb57c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 7701740238553409162}
-  approvalNumber: {fileID: 0}
-  approvalPoints: 0
-  isRed: 0
-  isBlue: 0
-  redSpeech: 0
-  blueSpeech: 0
-  isListening: 0

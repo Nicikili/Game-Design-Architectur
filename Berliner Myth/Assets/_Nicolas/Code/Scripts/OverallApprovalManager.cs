@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class OverallApprovalManager : MonoBehaviour
 {
@@ -8,10 +9,16 @@ public class OverallApprovalManager : MonoBehaviour
     private List<NpcController> allNpcs = new List<NpcController>();
     private Dictionary< string, int> groupCounts = new Dictionary< string, int>();
     private Dictionary<string, int> stateCounts = new Dictionary< string, int>();
+    [SerializeField] private TextMeshProUGUI overallApprovalPercentageValueF;
+    [SerializeField] private TextMeshProUGUI overallApprovalPercentageValueB;
+
+
     private int overallApprovalPercentage = 0;
 
     private int initialNpcCount = 0;
     private int deadNpcCount = 0;
+
+    private float imbalanceTicker = 0f;
 
     private void Start()
     {
@@ -91,6 +98,39 @@ public class OverallApprovalManager : MonoBehaviour
         }
     }
 
+    private void ImbalanceTicker()
+    {
+        if (groupCounts.Count < 2) return;
+
+        //Find the differnce between the largest and smallest groups
+
+        int maxCount = 0;
+        int minCount = int.MaxValue;
+
+        foreach (var group in groupCounts.Values)
+        {
+            maxCount = Mathf.Max(maxCount, group);
+            minCount = Mathf.Min(minCount, group);
+        }
+
+        int imbalance = maxCount - minCount;
+
+        //If imbalance exceeds a threshold, start adjusting approval
+
+        if (imbalance > 15) //threshold for imbalance
+        {
+            float adjustmentRate = imbalance * 0.01f; //scale adjustment for imbalance ticker
+            imbalanceTicker += adjustmentRate * Time.deltaTime;
+
+            overallApprovalPercentage = Mathf.Clamp(overallApprovalPercentage + Mathf.RoundToInt(imbalanceTicker), -100, 100);
+        }
+        else
+        {
+            imbalanceTicker = 0f;
+        }
+        
+    }
+
     private bool AreGroupsBalanced()
     {
         int totalNpcs = allNpcs.Count;
@@ -139,7 +179,13 @@ public class OverallApprovalManager : MonoBehaviour
         CountNpcsByGroup();
         CountNpcsByState();
 
+        ImbalanceTicker();
+
         WinConditionMet();
+
+        overallApprovalPercentageValueF.text = overallApprovalPercentage.ToString("F0");
+        overallApprovalPercentageValueB.text = overallApprovalPercentage.ToString("F0");
+
     }
 
     private void OnGUI()
@@ -172,14 +218,14 @@ public class OverallApprovalManager : MonoBehaviour
         };
 
         // Display the overall percentage
-        GUI.Label(labelRect, $"Approval: {overallApprovalPercentage}%", BigStyle);
+        //GUI.Label(labelRect, $"Approval: {overallApprovalPercentage}%", BigStyle);
 
         float yOffset = labelHeight + 10;
         foreach (var group in groupCounts)
         {
             Rect groupLabelRect = new Rect(
                 Screen.width - labelWidth - 10,
-                50 + yOffset,
+                100 + yOffset,
                 labelWidth,
                 labelHeight
                 );
@@ -192,7 +238,7 @@ public class OverallApprovalManager : MonoBehaviour
         {
             Rect stateLabelRect = new Rect(
                 Screen.width - labelWidth - 10,
-                50 + yOffset,
+                100 + yOffset,
                 labelWidth,
                 labelHeight
                 );
