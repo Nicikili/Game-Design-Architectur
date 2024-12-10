@@ -1764,21 +1764,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acddc2f4514b1c141bc2042379f12ee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isListening: 0
-  approvalFull: 0
-  aggressionNPCsAttackFull: 0
-  disapprovalFull: 0
-  aggressionPlayerAttackFull: 0
-  hueNPC: 0
-  saturationNPC: 0
-  valueNPC: 0
-  isBlue: 0
-  isRed: 0
-  speechRed: 0
-  speechBlue: 0
-  Approval: 0
-  slider: {fileID: 0}
-  approvalPoints: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
