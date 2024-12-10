@@ -34,7 +34,6 @@ public class PlayerController : MonoBehaviour
     private float lookRotationSpeed = 8f;
 
     private float pushForce = 5f;
-    private float pushRadius = 1.5f;
 
     public bool isSpeaking = false;
     public bool startSpeech = false;

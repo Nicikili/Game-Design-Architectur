@@ -11,16 +11,18 @@ public class NpcWander : NpcComponent
     public SpeechArea PlayerArea;
 
     [SerializeField] float maxWaitTime = 3f;
-    [SerializeField] float maxWaitTimeRandom = 5f;
+    float maxWaitTimeRandom = 5f;
 
     [SerializeField] float maxWanderTime = 10f;
-    [SerializeField] float maxWanderTimeRandom = 10f;
+    float maxWanderTimeRandom = 10f;
 
     [SerializeField] float maxAggroTime = 5f;
-    [SerializeField] float maxAggroTimeRandom = 7f;
+    float maxAggroTimeRandom = 7f;
 
     [SerializeField] float maxStuckTime = 3f;
-    [SerializeField] float maxStuckTimeRandom = 5f;
+    float maxStuckTimeRandom = 5f;
+
+    [SerializeField] float approvalMultiplier = 6f;
 
 
     enum Estate
@@ -34,7 +36,9 @@ public class NpcWander : NpcComponent
         AttackingPlayer,
         AttackingAttacking,
         DefendPlayer,
-        Convert
+        Convert,
+        Rally,
+        TemporaryAttackingOthers
     }
 
     [SerializeField] Estate state = Estate.Wandering;
@@ -50,9 +54,6 @@ public class NpcWander : NpcComponent
     private NpcController targetNpc = null;
 
     private bool hasArrived = false;
-
-
-
 
 
     private void Start()
@@ -207,12 +208,12 @@ public class NpcWander : NpcComponent
                     if (npc.controller.activeSpeechGroup == npc.GroupName) // if player speech group match to npc group (blueSpeech = blueGroup)
                     {
 
-                        npc.AdjustApproval(Time.deltaTime * 5f); //Gain Approval over Time
+                        npc.AdjustApproval(Time.deltaTime * approvalMultiplier); //Gain Approval over Time
 
                     }
                     else // if they do no match
                     {
-                        npc.AdjustApproval(-Time.deltaTime * 5f); //Lose approval over Time
+                        npc.AdjustApproval(-Time.deltaTime * approvalMultiplier); //Lose approval over Time
                     }
                 }
                 else //if player is not doing a speech
@@ -262,6 +263,22 @@ public class NpcWander : NpcComponent
                     }
                 }
             }
+            else if (state == Estate.TemporaryAttackingOthers)
+            {
+                float randomValue = Random.Range(0f, 100f);
+                if (randomValue < 33f) // If player stops the Speech go back to wandering 50%
+                {
+                    ChangeState(Estate.Wandering);
+                }
+                else if (randomValue < 66f)
+                {
+                    ChangeState(Estate.Waiting);
+                }
+                else
+                {
+                    ChangeState(Estate.AttackingPlayer);
+                }
+            }
             #endregion
         }
         else if (npc.Approval > 0.0f && npc.Approval <= 150f)
@@ -296,12 +313,12 @@ public class NpcWander : NpcComponent
                     if (npc.controller.activeSpeechGroup == npc.GroupName) // if player speech group match to npc group (blueSpeech = blueGroup)
                     {
 
-                        npc.AdjustApproval(Time.deltaTime * 5f); //Gain Approval over Time
+                        npc.AdjustApproval(Time.deltaTime * approvalMultiplier); //Gain Approval over Time
 
                     }
                     else // if they do no match
                     {
-                        npc.AdjustApproval(-Time.deltaTime * 5f); //Lose approval over Time
+                        npc.AdjustApproval(-Time.deltaTime * approvalMultiplier); //Lose approval over Time
                     }
                 }
                 else //if player is not doing a speech
@@ -420,6 +437,29 @@ public class NpcWander : NpcComponent
                     }
                 }
             }
+            else if (state == Estate.TemporaryAttackingOthers)
+            {
+                aggroTime -= Time.deltaTime;
+
+                HandleAttackOther();
+
+                if (aggroTime < 0f)
+                {
+                    float randomValue = Random.Range(0f, 100f);
+
+                    npc.agent.speed = 3.5f;
+
+                    if (randomValue < 50f)
+                    {
+                        ChangeState(Estate.Wandering);
+                    }
+                    else
+                    {
+                        ChangeState(Estate.Waiting);
+                    }
+
+                }
+            }
 
             #endregion
         }
@@ -434,12 +474,12 @@ public class NpcWander : NpcComponent
                     if (npc.controller.activeSpeechGroup == npc.GroupName) // if player speech group match to npc group
                     {
 
-                        npc.AdjustApproval(Time.deltaTime * 5f); //Gain Approval over Time
+                        npc.AdjustApproval(Time.deltaTime * approvalMultiplier); //Gain Approval over Time
 
                     }
                     else
                     {
-                        npc.AdjustApproval(-Time.deltaTime * 7f); //Lose approval over Time
+                        npc.AdjustApproval(-Time.deltaTime * approvalMultiplier); //Lose approval over Time
                     }
                 }
                 else // if player is not doing a speech
@@ -497,6 +537,21 @@ public class NpcWander : NpcComponent
             {
                 ChangeState(Estate.Following);
             }
+            else if (state == Estate.TemporaryAttackingOthers)
+            {
+                aggroTime -= Time.deltaTime;
+
+                HandleAttackOther();
+
+                if (aggroTime < 0f)
+                {
+
+                    npc.agent.speed = 3.5f;
+
+                    ChangeState(Estate.Following);
+
+                }
+            }
             else if (state == Estate.AttackingAttacking)
             {
                 aggroTime -= Time.deltaTime;
@@ -533,17 +588,93 @@ public class NpcWander : NpcComponent
                 {
                     float randomValue = Random.Range(0f, 100f);
 
-                    if (randomValue < 45)
+                    npc.agent.speed = 3.5f;
+
+                    if (randomValue < 22)
                     {
                         ChangeState(Estate.AttackingOthers);
                     }
-                    else if (randomValue < 65)
+                    else if (randomValue < 44)
                     {
                         ChangeState(Estate.Waiting);
                     }
-                    else if (randomValue < 85)
+                    else if (randomValue < 66)
                     {
                         ChangeState(Estate.Wandering);
+                    }
+                    else if (randomValue < 88)
+                    {
+                        ChangeState(Estate.Rally);
+                    }
+                    else
+                    {
+                        ChangeState(Estate.Following);
+                    }
+
+                }
+            }
+            else if (state == Estate.TemporaryAttackingOthers)
+            {
+                aggroTime -= Time.deltaTime;
+
+                HandleAttackOther();
+
+                if (aggroTime < 0f)
+                {
+                    float randomValue = Random.Range(0f, 100f);
+
+                    npc.agent.speed = 3.5f;
+
+                    if (randomValue < 22)
+                    {
+                        ChangeState(Estate.AttackingOthers);
+                    }
+                    else if (randomValue < 44)
+                    {
+                        ChangeState(Estate.Waiting);
+                    }
+                    else if (randomValue < 66)
+                    {
+                        ChangeState(Estate.Wandering);
+                    }
+                    else if (randomValue < 88)
+                    {
+                        ChangeState(Estate.Rally);
+                    }
+                    else
+                    {
+                        ChangeState(Estate.Following);
+                    }
+
+                }
+            }
+            else if (state == Estate.Rally)
+            {
+                aggroTime -= Time.deltaTime;
+
+                HandleRallyOther();
+
+                if (aggroTime < 0f)
+                {
+                    float randomValue = Random.Range(0f, 100f);
+
+                    npc.agent.speed = 3.5f;
+
+                    if (randomValue < 22)
+                    {
+                        ChangeState(Estate.AttackingOthers);
+                    }
+                    else if (randomValue < 44)
+                    {
+                        ChangeState(Estate.Waiting);
+                    }
+                    else if (randomValue < 66)
+                    {
+                        ChangeState(Estate.Wandering);
+                    }
+                    else if (randomValue < 88)
+                    {
+                        ChangeState(Estate.Rally);
                     }
                     else
                     {
@@ -566,13 +697,19 @@ public class NpcWander : NpcComponent
 
                 if (HasArrived() || wanderTime < 0f) // If has arrived at told location or wandered around for too long change to waiting
                 {
-                    if (Random.Range(0f, 100f) > 45f)
+                    float randomValue = Random.Range(0f, 100f);
+
+                    if (randomValue < 50)
                     {
                         ChangeState(Estate.AttackingOthers);
                     }
-                    else
+                    else if (randomValue < 25)
                     {
                         ChangeState(Estate.Waiting);
+                    }
+                    else
+                    {
+                        ChangeState(Estate.Rally);
                     }
                 }
 
@@ -595,13 +732,19 @@ public class NpcWander : NpcComponent
 
                 if (waitTime < 0f) // switch back to wandering after waitTime has passed
                 {
-                    if (Random.Range(0f, 100f) > 45f)
+                    float randomValue = Random.Range(0f, 100f);
+
+                    if (randomValue < 50)
                     {
                         ChangeState(Estate.AttackingOthers);
                     }
-                    else
+                    else if (randomValue < 25)
                     {
                         ChangeState(Estate.Wandering);
+                    }
+                    else
+                    {
+                        ChangeState(Estate.Rally);
                     }
                 }
 
@@ -688,7 +831,7 @@ public class NpcWander : NpcComponent
                     }
                     else
                     {
-                        ChangeState(Estate.Following);
+                        ChangeState(Estate.Rally);
                     }
                 }
 
@@ -708,17 +851,21 @@ public class NpcWander : NpcComponent
                 {
                     float randomValue = Random.Range(0f, 100f);
 
-                    if (randomValue < 45f)
+                    if (randomValue < 22)
                     {
                         ChangeState(Estate.AttackingOthers);
                     }
-                    else if (randomValue < 65f)
+                    else if (randomValue < 44)
                     {
                         ChangeState(Estate.Waiting);
                     }
-                    else if (randomValue < 85f)
+                    else if (randomValue < 66)
                     {
                         ChangeState(Estate.Wandering);
+                    }
+                    else if (randomValue < 88)
+                    {
+                        ChangeState(Estate.Rally);
                     }
                     else
                     {
@@ -801,6 +948,8 @@ public class NpcWander : NpcComponent
 
             aggroTime = maxAggroTime + Random.Range(0f, maxAggroTimeRandom);
 
+            npc.agent.speed = 5f;
+
             HandleAttackRetaliation();
         }
         else if (state == Estate.DefendPlayer)
@@ -809,11 +958,28 @@ public class NpcWander : NpcComponent
 
             HandleAttackPlayerRetaliation();
 
-            //if player is attacked and npcs are following the following npc will attack the attacking npcs that are attacking the player
         }
         else if (state == Estate.Convert)
         {
             npc.agent.isStopped = false;
+        }
+        else if (state == Estate.Rally)
+        {
+            npc.agent.isStopped = false;
+
+            HandleRallyOther();
+
+            aggroTime = (maxAggroTime * 2) + Random.Range(0f, maxAggroTimeRandom);
+
+            npc.agent.speed = 5f;
+        }
+        else if (state == Estate.TemporaryAttackingOthers)
+        {
+            npc.agent.isStopped = false;
+
+            aggroTime = maxAggroTime + Random.Range(0f, maxAggroTimeRandom);
+
+            HandleAttackOther();
         }
     }
 
@@ -992,6 +1158,41 @@ public class NpcWander : NpcComponent
             }
         }
     }
+
+    void HandleRallyOther()
+    {
+        if (targetNpc == null)
+        {
+            targetNpc = FindFurthestNpc();
+        }
+
+        if (targetNpc != null)
+        {
+            npc.agent.SetDestination(targetNpc.transform.position);
+
+            if (Vector3.Distance(npc.agent.transform.position, targetNpc.transform.position) <= 2f)
+            {
+                targetNpc.TakenDamage(Time.deltaTime * 5, npc);
+            }
+        }
+
+        NpcController[] allNpcs = FindObjectsOfType<NpcController>();
+        foreach (NpcController nearbyNpc in allNpcs)
+        {
+            if (nearbyNpc == npc || nearbyNpc.GroupName != npc.GroupName) continue;
+            {
+                float distance = Vector3.Distance(npc.agent.transform.position, nearbyNpc.transform.position);
+                if (distance < 5f)
+                {
+                    NpcWander wanderComponent = nearbyNpc.GetComponent<NpcWander>();
+                    if (wanderComponent != null)
+                    {
+                        wanderComponent.state = Estate.TemporaryAttackingOthers;
+                    }
+                }
+            }
+        }
+    }
     void HandleAttackPlayer()
     {
 
@@ -999,7 +1200,7 @@ public class NpcWander : NpcComponent
 
         if (Vector3.Distance(npc.agent.transform.position, npc.player.transform.position) <= 4f)
         {
-            npc.controller.PlayerTakenDamage(Time.deltaTime * 1);
+            npc.controller.PlayerTakenDamage(Time.deltaTime * 2);
         }
 
     }
@@ -1039,7 +1240,7 @@ public class NpcWander : NpcComponent
 
     private IEnumerator ApplyDamageAfterDelay(NpcController target)
     {
-        yield return new WaitForSeconds(Random.Range(1f, 2f));
+        yield return new WaitForSeconds(Random.Range(2f, 7f));
 
         if (target != null && Vector3.Distance(npc.agent.transform.position, target.transform.position) <= 2f)
         {
@@ -1080,5 +1281,3 @@ public class NpcWander : NpcComponent
 }
 
 //Reminder - pusher to get a path through people
-
-//TODO - Player attack and Npc Attack
