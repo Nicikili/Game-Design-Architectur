@@ -148,10 +148,10 @@ public class OverallApprovalManager : MonoBehaviour
         float labelWidth = 200f;
         float labelHeight = 50f;
         Rect labelRect = new Rect(
-            Screen.width - labelWidth - 10,
+            Screen.width - labelWidth * 2 - 10,
             10,
-            labelWidth,
-            labelHeight 
+            labelWidth * 2,
+            labelHeight * 2 
             );
 
         // Define Style
@@ -160,18 +160,26 @@ public class OverallApprovalManager : MonoBehaviour
             fontSize = 18,
             fontStyle = FontStyle.Bold,
             alignment = TextAnchor.MiddleRight,
-            normal = { textColor = Color.white }
+            normal = { textColor = Color.yellow }
+        };
+
+        GUIStyle BigStyle = new GUIStyle(GUI.skin.label)
+        {
+            fontSize = 48,
+            fontStyle = FontStyle.Bold,
+            alignment = TextAnchor.MiddleRight,
+            normal = { textColor = Color.yellow }
         };
 
         // Display the overall percentage
-        GUI.Label(labelRect, $"Approval: {overallApprovalPercentage}%", style);
+        GUI.Label(labelRect, $"Approval: {overallApprovalPercentage}%", BigStyle);
 
         float yOffset = labelHeight + 10;
         foreach (var group in groupCounts)
         {
             Rect groupLabelRect = new Rect(
                 Screen.width - labelWidth - 10,
-                10 + yOffset,
+                50 + yOffset,
                 labelWidth,
                 labelHeight
                 );
@@ -184,7 +192,7 @@ public class OverallApprovalManager : MonoBehaviour
         {
             Rect stateLabelRect = new Rect(
                 Screen.width - labelWidth - 10,
-                10 + yOffset,
+                50 + yOffset,
                 labelWidth,
                 labelHeight
                 );

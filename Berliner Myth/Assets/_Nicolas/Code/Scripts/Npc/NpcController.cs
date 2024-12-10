@@ -118,7 +118,7 @@ public class NpcController : MonoBehaviour
 
         if(screenPosition.z > 0) // only renders if NPC is in front of the camera
         {
-            float labelWidth = 150f;
+            float labelWidth = 200f;
             float labelHeight = 50f;
 
             Rect rect = new Rect(

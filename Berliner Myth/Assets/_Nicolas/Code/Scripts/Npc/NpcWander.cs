@@ -13,8 +13,8 @@ public class NpcWander : NpcComponent
     [SerializeField] float maxWaitTime = 3f;
     [SerializeField] float maxWaitTimeRandom = 5f;
 
-    [SerializeField] float maxWanderTime = 5f;
-    [SerializeField] float maxWanderTimeRandom = 7f;
+    [SerializeField] float maxWanderTime = 10f;
+    [SerializeField] float maxWanderTimeRandom = 10f;
 
     [SerializeField] float maxAggroTime = 5f;
     [SerializeField] float maxAggroTimeRandom = 7f;
@@ -439,7 +439,7 @@ public class NpcWander : NpcComponent
                     }
                     else
                     {
-                        npc.AdjustApproval(-Time.deltaTime * 5f); //Lose approval over Time
+                        npc.AdjustApproval(-Time.deltaTime * 7f); //Lose approval over Time
                     }
                 }
                 else // if player is not doing a speech
@@ -533,17 +533,17 @@ public class NpcWander : NpcComponent
                 {
                     float randomValue = Random.Range(0f, 100f);
 
-                    if (randomValue < 25f)
+                    if (randomValue < 45)
                     {
-                        ChangeState(Estate.Wandering);
+                        ChangeState(Estate.AttackingOthers);
                     }
-                    else if (randomValue < 50f)
+                    else if (randomValue < 65)
                     {
                         ChangeState(Estate.Waiting);
                     }
-                    else if (randomValue < 75f)
+                    else if (randomValue < 85)
                     {
-                        ChangeState(Estate.AttackingOthers);
+                        ChangeState(Estate.Wandering);
                     }
                     else
                     {
@@ -566,7 +566,7 @@ public class NpcWander : NpcComponent
 
                 if (HasArrived() || wanderTime < 0f) // If has arrived at told location or wandered around for too long change to waiting
                 {
-                    if (Random.Range(0f, 100f) > 50f)
+                    if (Random.Range(0f, 100f) > 45f)
                     {
                         ChangeState(Estate.AttackingOthers);
                     }
@@ -595,7 +595,7 @@ public class NpcWander : NpcComponent
 
                 if (waitTime < 0f) // switch back to wandering after waitTime has passed
                 {
-                    if (Random.Range(0f, 100f) > 50f)
+                    if (Random.Range(0f, 100f) > 45f)
                     {
                         ChangeState(Estate.AttackingOthers);
                     }
@@ -641,7 +641,7 @@ public class NpcWander : NpcComponent
                 }
                 else if (!HasArrived() && stuckTime < 0 || !npc.controller.startSpeech)
                 {
-                    if (Random.Range(0f, 100f) > 50f)
+                    if (Random.Range(0f, 100f) > 45f)
                     {
                         ChangeState(Estate.AttackingOthers);
                     }
@@ -663,28 +663,28 @@ public class NpcWander : NpcComponent
                     if (npc.controller.activeSpeechGroup == npc.GroupName) // if player speech group match to npc group (blueSpeech = blueGroup)
                     {
 
-                        npc.AdjustApproval(Time.deltaTime * 5f); //Gain Approval over Time
+                        npc.AdjustApproval(Time.deltaTime * 7f); //Gain Approval over Time
 
                     }
                     else // if they do no match
                     {
-                        npc.AdjustApproval(-Time.deltaTime * 5f); //Lose approval over Time
+                        npc.AdjustApproval(-Time.deltaTime * 7f); //Lose approval over Time
                     }
                 }
                 else //if player is not doing a speech
                 {
                     float randomValue = Random.Range(0f, 100f);
-                    if (randomValue < 25f) // If player stops the Speech go back to wandering 50%
+                    if (randomValue < 45f) // If player stops the Speech go back to wandering 50%
                     {
-                        ChangeState(Estate.Wandering);
+                        ChangeState(Estate.AttackingOthers);
                     }
-                    else if (randomValue < 50f)
+                    else if (randomValue < 65f)
                     {
                         ChangeState(Estate.Waiting);
                     }
-                    else if (randomValue < 75f)
+                    else if (randomValue < 85f)
                     {
-                        ChangeState(Estate.AttackingOthers);
+                        ChangeState(Estate.Wandering);
                     }
                     else
                     {
@@ -708,21 +708,21 @@ public class NpcWander : NpcComponent
                 {
                     float randomValue = Random.Range(0f, 100f);
 
-                    if (randomValue < 25f)
+                    if (randomValue < 45f)
                     {
-                        ChangeState(Estate.Wandering);
+                        ChangeState(Estate.AttackingOthers);
                     }
-                    else if (randomValue < 50f)
+                    else if (randomValue < 65f)
                     {
                         ChangeState(Estate.Waiting);
                     }
-                    else if (randomValue < 75f)
+                    else if (randomValue < 85f)
                     {
-                        ChangeState(Estate.Following);
+                        ChangeState(Estate.Wandering);
                     }
                     else
                     {
-                        ChangeState(Estate.AttackingOthers);
+                        ChangeState(Estate.Following);
                     }
                 }
             }
@@ -997,9 +997,9 @@ public class NpcWander : NpcComponent
 
         npc.agent.SetDestination(npc.player.transform.position);
 
-        if (Vector3.Distance(npc.agent.transform.position, npc.player.transform.position) <= 2f)
+        if (Vector3.Distance(npc.agent.transform.position, npc.player.transform.position) <= 4f)
         {
-            npc.controller.PlayerTakenDamage(Time.deltaTime * 5);
+            npc.controller.PlayerTakenDamage(Time.deltaTime * 1);
         }
 
     }
@@ -1043,7 +1043,7 @@ public class NpcWander : NpcComponent
 
         if (target != null && Vector3.Distance(npc.agent.transform.position, target.transform.position) <= 2f)
         {
-            target.TakenDamage(Time.deltaTime * 5, npc);
+            target.TakenDamage(Time.deltaTime * 3, npc);
         }
     }
 

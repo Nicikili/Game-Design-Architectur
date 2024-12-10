@@ -2,8 +2,8 @@ using System.Collections;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 [SelectionBase]
 public class PlayerController : MonoBehaviour
@@ -25,8 +25,16 @@ public class PlayerController : MonoBehaviour
     private float currentHealt;
     public bool isPlayerAttacked = false;
 
+    [SerializeField] private Slider speechBar;
+    [SerializeField] private float maxSpeechDuration = 20f;
+    [SerializeField] private float speechCoolDown = 2f;
+    private float currentSpeechTime;
+    private bool isCoolingDown = false;
 
     private float lookRotationSpeed = 8f;
+
+    private float pushForce = 5f;
+    private float pushRadius = 1.5f;
 
     public bool isSpeaking = false;
     public bool startSpeech = false;
@@ -42,12 +50,30 @@ public class PlayerController : MonoBehaviour
         if (obstacle != null) { obstacle.enabled = false; }
 
         currentHealt = maxHealth;
+
+        if (speechBar != null) { speechBar.maxValue = maxSpeechDuration; speechBar.value = maxSpeechDuration; }
+
     }
     private void Update()
     {
         if (agent.enabled)
         {
             FaceTarget();
+        }
+
+        if (startSpeech && !isCoolingDown)
+        {
+            currentSpeechTime -= Time.deltaTime;
+            UpdateSpeechBar();
+
+            if (currentSpeechTime <= 0)
+            {
+                StopSpeech();
+            }
+        }
+        else if (agent.velocity.magnitude > 0.1)
+        {
+            RechargeSpeechBar();
         }
     }
 
@@ -166,6 +192,7 @@ public class PlayerController : MonoBehaviour
         if (isSpeaking)
         {
             BlueSpeech();
+
         }
     }
 
@@ -242,6 +269,7 @@ public class PlayerController : MonoBehaviour
         //Stop Animation On Box
 
         animator.SetBool("IsBox", false);
+
     }
 
     private IEnumerator EnableNavMeshAgentNextFrame()
@@ -253,6 +281,8 @@ public class PlayerController : MonoBehaviour
 
     public void BlueSpeech()
     {
+        if (currentSpeechTime <= 0) return;
+
         Debug.Log("Start Speaking for Blue");
 
         animator.SetBool("IsSpeaking", true);
@@ -267,6 +297,8 @@ public class PlayerController : MonoBehaviour
 
     public void RedSpeech()
     {
+        if (currentSpeechTime <= 0) return;
+
         Debug.Log("Start Speaking for Red");
 
         animator.SetBool("IsSpeaking", true);
@@ -290,12 +322,49 @@ public class PlayerController : MonoBehaviour
 
         activeSpeechGroup = "None";
     }
+    private void UpdateSpeechBar()
+    {
+        if (speechBar != null)
+        {
+            speechBar.value = currentSpeechTime;
+        }
+    }
+
+    private void RechargeSpeechBar()
+    {
+        if (currentSpeechTime <  maxSpeechDuration)
+        {
+            currentSpeechTime += Time.deltaTime / speechCoolDown * maxSpeechDuration;
+            UpdateSpeechBar();
+        }
+        else
+        {
+            currentSpeechTime =  maxSpeechDuration;
+            isCoolingDown = false;
+        }
+    }
     #endregion
 
     #region Health&Damage
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("NPC"))
+        {
+            Rigidbody npcRigidbody = other.GetComponent<Rigidbody>();
+
+            if (npcRigidbody != null)
+            {
+                Vector3 pushDirection = (other.transform.position - transform.position).normalized;
+
+                npcRigidbody.AddForce(pushDirection * pushForce, ForceMode.Impulse);
+
+            }
+        }
+    }
     public void PlayerTakenDamage(float damage)
     {
-        currentHealt =- damage;
+        currentHealt -= damage;
         currentHealt = Mathf.Clamp(currentHealt, 0, maxHealth);
 
         if (currentHealt <= 0)
@@ -312,4 +381,30 @@ public class PlayerController : MonoBehaviour
         
     }
     #endregion
+
+    private void OnGUI()
+    {
+        // Define Position and Size
+        float labelWidth = 200f;
+        float labelHeight = 50f;
+        Rect labelRect = new Rect(
+            10,
+            Screen.height - labelHeight * 2 - 10,
+            labelWidth * 2,
+            labelHeight * 2
+            );
+
+        // Define Style
+        GUIStyle BigStyle = new GUIStyle(GUI.skin.label)
+        {
+            fontSize = 48,
+            fontStyle = FontStyle.Bold,
+            alignment = TextAnchor.MiddleRight,
+            normal = { textColor = Color.yellow }
+        };
+
+        // Display the overall percentage
+        GUI.Label(labelRect, $"Health: {currentHealt}%", BigStyle);
+    }
+
 }

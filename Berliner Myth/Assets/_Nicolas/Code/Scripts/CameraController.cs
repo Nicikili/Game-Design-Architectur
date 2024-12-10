@@ -17,8 +17,8 @@ public class CameraController : MonoBehaviour
 
     private float rotationSpeed = 0.5f;
     private float zoomSpeed = 5f;
-    private float minZoom = 2f;
-    private float maxZoom = 20f;
+    private float minZoom = 1f;
+    private float maxZoom = 40f;
     private float currentZoom = 5f;
 
     private void Awake()
