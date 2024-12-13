@@ -10,6 +10,7 @@ public class CameraWander : MonoBehaviour
     [SerializeField] Transform targetOptions;
     [SerializeField] Transform targetDevs;
     [SerializeField] Transform targetMusician;
+    [SerializeField] Transform targetHowTo;
     #endregion
 
     #region RaycastStuff
@@ -62,6 +63,12 @@ public class CameraWander : MonoBehaviour
             {
                 Target = hit.collider.gameObject;
                 WanderingCameraTransform.position = targetMusician.position;
+            }
+
+            if (hit.collider.gameObject.tag == "MoveToHowTo") //Controls Menu Screen
+            {
+                Target = hit.collider.gameObject;
+                WanderingCameraTransform.position = targetHowTo.position;
             }
         }
     }

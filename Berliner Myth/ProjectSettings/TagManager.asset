@@ -12,6 +12,7 @@ TagManager:
   - MoveToMusican
   - Deko
   - NPC
+  - MoveToHowTo
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - UI
   - MoveToPaper
   - Ignore NavMesh
-  - 
+  - ShadowNPCs
   - 
   - 
   - 
