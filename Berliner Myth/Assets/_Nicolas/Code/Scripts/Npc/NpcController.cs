@@ -29,6 +29,10 @@ public class NpcController : MonoBehaviour
 
     private NpcWander wanderComponent;
 
+    [SerializeField] private SpriteRenderer reactionSpriteRenderer;
+    [SerializeField] private Sprite happySprite;
+    [SerializeField] private Sprite angrySprite;
+
     public float CurrentSpeed
     {
         get { return agent.velocity.magnitude; }
@@ -46,6 +50,8 @@ public class NpcController : MonoBehaviour
     private void Start()
     {
         CurrentHealth = maxHealth;
+
+        SetReactionState("neutral");
     }
 
     public void SetGroup(string groupName, Color groupColor)
@@ -110,6 +116,42 @@ public class NpcController : MonoBehaviour
     private void Die()
     {
         Destroy(gameObject);
+    }
+
+    void SetReactionState(string state)
+    {
+        if(state == "happy")
+        {
+            reactionSpriteRenderer.sprite = happySprite;
+
+            Debug.Log("I am fine");
+
+        }
+        else if (state == "angry")
+        {
+            reactionSpriteRenderer.sprite = angrySprite;
+
+            Debug.Log("I ANGY");
+
+        }
+        else
+        {
+            reactionSpriteRenderer.sprite = null;
+
+            Debug.Log("should i be concerned");
+        }
+    }
+
+    void UpdateReaction()
+    {
+        if (controller.activeSpeechGroup == GroupName)
+        {
+            SetReactionState("happy");
+        }
+        else
+        {
+            SetReactionState("angry");
+        }
     }
 
     private void OnGUI() //Display above each NPC affiliation and Aprroval Count
