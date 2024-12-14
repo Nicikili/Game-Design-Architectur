@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="EventFolder" id="{4ba64455-6faa-406a-995e-259fb1204371}">
+		<property name="name">
+			<value>Moritz_Soundtrack</value>
+		</property>
+		<relationship name="folder">
+			<destination>{ec5817d7-441b-4b4d-9165-7d33393d0614}</destination>
+		</relationship>
+	</object>
+</objects>
