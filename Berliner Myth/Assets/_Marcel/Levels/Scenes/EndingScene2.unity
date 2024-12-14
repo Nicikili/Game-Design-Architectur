@@ -548,6 +548,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Newspaper: {fileID: 1185322988}
   NewspaperSlapped: {fileID: 186953234}
+  Picture: {fileID: 713241542}
   newsPaperAnimationCurve:
     serializedVersion: 2
     m_Curve:

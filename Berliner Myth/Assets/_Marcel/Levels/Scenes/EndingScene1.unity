@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &186953235
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -516,6 +516,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Newspaper: {fileID: 1185322988}
   NewspaperSlapped: {fileID: 186953234}
+  Picture: {fileID: 713241542}
   newsPaperAnimationCurve:
     serializedVersion: 2
     m_Curve:
