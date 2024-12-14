@@ -986,6 +986,15 @@ public class NpcWander : NpcComponent
 
             npc.agent.speed = 3.5f;
 
+            if (npc.controller.activeSpeechGroup == npc.GroupName)
+            {
+                npc.ShowPositivReaction();
+            }
+            else
+            {
+                npc.ShowNegativReaction();
+            }
+
         }
         else if (state == Estate.Waiting)
         {

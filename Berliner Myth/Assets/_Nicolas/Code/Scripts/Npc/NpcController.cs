@@ -29,9 +29,13 @@ public class NpcController : MonoBehaviour
 
     private NpcWander wanderComponent;
 
-    [SerializeField] private SpriteRenderer reactionSpriteRenderer;
-    [SerializeField] private Sprite happySprite;
-    [SerializeField] private Sprite angrySprite;
+    //NPC Reaction Bubble
+    [SerializeField] private GameObject reactionBubblePrefab; 
+    [SerializeField] private Sprite positiveRectionSprite;
+    [SerializeField] private Sprite negativeRectionSprite;
+
+    private GameObject reactionBubbleInstance;
+    private SpriteRenderer reactionSpriteRenderer;
 
     public float CurrentSpeed
     {
@@ -45,13 +49,44 @@ public class NpcController : MonoBehaviour
         controller = player.GetComponent<PlayerController>();
         mainCamera = Camera.main;
         wanderComponent = GetComponent<NpcWander>();
+
     }
 
     private void Start()
     {
         CurrentHealth = maxHealth;
 
-        SetReactionState("neutral");
+        //Instantiate and configure the reaction bubble
+        if (reactionBubblePrefab != null)
+        {
+            reactionBubbleInstance = Instantiate(reactionBubblePrefab, transform);
+            reactionBubbleInstance.transform.localPosition = new Vector3(0, 2, 0); // Position above the NPC
+
+            // Reset the local rotation to prevent inheriting NPC's rotation
+            reactionBubbleInstance.transform.localRotation = Quaternion.identity;
+
+            reactionSpriteRenderer = reactionBubbleInstance.GetComponent<SpriteRenderer>();
+            reactionBubbleInstance.SetActive(false); // Hide initially
+        }
+        if (reactionBubbleInstance != null && Camera.main != null)
+        {
+            // Calculate direction to the camera while locking the Y-axis
+            Vector3 direction = Camera.main.transform.position - reactionBubbleInstance.transform.position;
+            direction.y = 0; // Lock vertical rotation to keep the bubble upright
+            reactionBubbleInstance.transform.rotation = Quaternion.LookRotation(direction);
+        }
+
+    }
+
+    private void Update()
+    {
+        if (reactionBubbleInstance != null && Camera.main != null)
+        {
+            // Calculate direction to the camera while locking the Y-axis
+            Vector3 direction = Camera.main.transform.position - reactionBubbleInstance.transform.position;
+            direction.y = 0; // Lock vertical rotation to keep the bubble upright
+            reactionBubbleInstance.transform.rotation = Quaternion.LookRotation(direction);
+        }
     }
 
     public void SetGroup(string groupName, Color groupColor)
@@ -118,39 +153,33 @@ public class NpcController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void SetReactionState(string state)
+    public void ShowPositivReaction()
     {
-        if(state == "happy")
+        ShowReaction(positiveRectionSprite);
+    }
+
+    public void ShowNegativReaction()
+    {
+       ShowReaction(negativeRectionSprite);
+    }
+
+    private void ShowReaction(Sprite reactionSprite)
+    {
+        if (reactionSpriteRenderer)
         {
-            reactionSpriteRenderer.sprite = happySprite;
+            reactionSpriteRenderer.sprite = reactionSprite;
+            reactionBubbleInstance.SetActive(true);
 
-            Debug.Log("I am fine");
-
-        }
-        else if (state == "angry")
-        {
-            reactionSpriteRenderer.sprite = angrySprite;
-
-            Debug.Log("I ANGY");
-
-        }
-        else
-        {
-            reactionSpriteRenderer.sprite = null;
-
-            Debug.Log("should i be concerned");
+            StartCoroutine(HideReactionBubble());
         }
     }
 
-    void UpdateReaction()
+    private IEnumerator HideReactionBubble()
     {
-        if (controller.activeSpeechGroup == GroupName)
+        yield return new WaitForSeconds(2f); //Display for 2 seconds
+        if (reactionBubbleInstance != null)
         {
-            SetReactionState("happy");
-        }
-        else
-        {
-            SetReactionState("angry");
+            reactionBubbleInstance.SetActive(false);
         }
     }
 
