@@ -488,9 +488,11 @@ MonoBehaviour:
   MasterBanks:
   - Master
   Banks:
-  - Bank A
-  - Soundtrack
-  - UI_Sound
+  - ambient_bank
+  - music_bank
+  - NPC_bank
+  - player_bank
+  - UI_bank
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="Bank" id="{7f9e3491-fd9d-4b58-986d-fb35162a6e4f}">
+		<property name="color">
+			<value>Magenta Light 2</value>
+		</property>
+		<property name="name">
+			<value>NPC_bank</value>
+		</property>
+		<relationship name="folder">
+			<destination>{c594d0a4-8727-4840-9bab-9efa4fe52c20}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="Bank" id="{b4302e29-612e-45ef-9134-84c3c3556a2e}">
+		<property name="color">
+			<value>Red Light 1</value>
+		</property>
+		<property name="name">
+			<value>player_bank</value>
+		</property>
+		<relationship name="folder">
+			<destination>{c594d0a4-8727-4840-9bab-9efa4fe52c20}</destination>
+		</relationship>
+	</object>
+</objects>

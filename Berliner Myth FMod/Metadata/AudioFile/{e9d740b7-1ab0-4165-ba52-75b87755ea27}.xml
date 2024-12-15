@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{e9d740b7-1ab0-4165-ba52-75b87755ea27}">
+		<property name="assetPath">
+			<value>Ambient_BG_CityNoise.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>19.242834467120183</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{e1b9a853-09cc-4fe8-b08c-50dc6b1f0748}</destination>
+		</relationship>
+	</object>
+</objects>
