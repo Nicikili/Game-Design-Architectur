@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{2ea2222d-6435-4dcd-a64f-592b5729fe2e}">
+		<property name="name">
+			<value>EscalationCurve</value>
+		</property>
+		<relationship name="folder">
+			<destination>{7698d94c-802c-41ac-8483-640fce642e46}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{c5293ec2-68a9-42d8-b02b-49cfb8093b0d}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{c5293ec2-68a9-42d8-b02b-49cfb8093b0d}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>4</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Calm</value>
+			<value>Escalation1</value>
+			<value>Escalation2</value>
+			<value>Escalation3</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
