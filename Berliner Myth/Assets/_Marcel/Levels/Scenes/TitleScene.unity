@@ -3626,8 +3626,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4456806845262753563, guid: 49f1222dac11c6e4db9703d8a6fdf688,
         type: 3}
+      propertyPath: <Titelmusik>k__BackingField.Path
+      value: event:/TitleScene/music/Titelmusik
+      objectReference: {fileID: 0}
+    - target: {fileID: 4456806845262753563, guid: 49f1222dac11c6e4db9703d8a6fdf688,
+        type: 3}
       propertyPath: <SE_SwitchAround>k__BackingField.Path
       value: event:/SE_SwitchAround
+      objectReference: {fileID: 0}
+    - target: {fileID: 4456806845262753563, guid: 49f1222dac11c6e4db9703d8a6fdf688,
+        type: 3}
+      propertyPath: <Titelmusik>k__BackingField.Guid.Data1
+      value: -1855591924
+      objectReference: {fileID: 0}
+    - target: {fileID: 4456806845262753563, guid: 49f1222dac11c6e4db9703d8a6fdf688,
+        type: 3}
+      propertyPath: <Titelmusik>k__BackingField.Guid.Data2
+      value: 1132878087
+      objectReference: {fileID: 0}
+    - target: {fileID: 4456806845262753563, guid: 49f1222dac11c6e4db9703d8a6fdf688,
+        type: 3}
+      propertyPath: <Titelmusik>k__BackingField.Guid.Data3
+      value: 1285334968
+      objectReference: {fileID: 0}
+    - target: {fileID: 4456806845262753563, guid: 49f1222dac11c6e4db9703d8a6fdf688,
+        type: 3}
+      propertyPath: <Titelmusik>k__BackingField.Guid.Data4
+      value: 1241726563
       objectReference: {fileID: 0}
     - target: {fileID: 4456806845262753563, guid: 49f1222dac11c6e4db9703d8a6fdf688,
         type: 3}

@@ -46,11 +46,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <SE_SwitchAround>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -1136160830
+      Data2: 1230533377
+      Data3: 2014246275
+      Data4: 843458954
+    Path: event:/SE_SwitchAround
+  <BackgroundNoise>k__BackingField:
+    Guid:
+      Data1: 99463998
+      Data2: 1242798052
+      Data3: 2015896502
+      Data4: 1895425974
+    Path: event:/Ambient_BG_CityNoise
+  <ST_TitleScreen>k__BackingField:
+    Guid:
+      Data1: -1855591924
+      Data2: 1132878087
+      Data3: 1285334968
+      Data4: 1241726563
+    Path: event:/TitleScene/Music/Titelmusik
+  <ST_InGame_Calm>k__BackingField:
+    Guid:
+      Data1: 227813162
+      Data2: 1161632131
+      Data3: -1815492940
+      Data4: -158392881
+    Path: event:/InGame/Soundtrack/InGameMusic
+  <ST_Ending1>k__BackingField:
+    Guid:
+      Data1: 961027387
+      Data2: 1115146686
+      Data3: 213473953
+      Data4: 858857756
+    Path: event:/EndingScene/Soundtrack/Lustiges Ende
+  <ST_Ending2>k__BackingField:
+    Guid:
+      Data1: 1223740666
+      Data2: 1138661134
+      Data3: -1013141594
+      Data4: -1410723478
+    Path: event:/EndingScene/Soundtrack/Nicht ganz so tragisches Ende
+  <ST_Ending3>k__BackingField:
+    Guid:
+      Data1: -1020702586
+      Data2: 1281369285
+      Data3: 368201652
+      Data4: -1778467771
+    Path: event:/EndingScene/Soundtrack/Tragisches Ende
 --- !u!1 &4219182810948935828
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,3 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2615c34497e56514e89d610dee875972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterVolume: 1
+  musicVolume: 1
+  ambienceVolume: 1
+  SFXVolume: 1
