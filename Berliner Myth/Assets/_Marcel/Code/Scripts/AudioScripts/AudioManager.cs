@@ -4,9 +4,9 @@ using UnityEngine;
 using FMODUnity;
 //https://www.youtube.com/watch?v=rcBHIOjZDpk&ab_channel=ShapedbyRainStudios
 
-public class AudioManagerScript : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
-	public static AudioManagerScript instance { get; private set; }
+	public static AudioManager instance { get; private set; }
 
 	private void Awake()
 	{

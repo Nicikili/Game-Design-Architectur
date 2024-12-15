@@ -3624,6 +3624,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4456806845262753563, guid: 49f1222dac11c6e4db9703d8a6fdf688,
+        type: 3}
+      propertyPath: <SE_SwitchAround>k__BackingField.Path
+      value: event:/SE_SwitchAround
+      objectReference: {fileID: 0}
+    - target: {fileID: 4456806845262753563, guid: 49f1222dac11c6e4db9703d8a6fdf688,
+        type: 3}
+      propertyPath: <SE_SwitchAround>k__BackingField.Guid.Data1
+      value: -1136160830
+      objectReference: {fileID: 0}
+    - target: {fileID: 4456806845262753563, guid: 49f1222dac11c6e4db9703d8a6fdf688,
+        type: 3}
+      propertyPath: <SE_SwitchAround>k__BackingField.Guid.Data2
+      value: 1230533377
+      objectReference: {fileID: 0}
+    - target: {fileID: 4456806845262753563, guid: 49f1222dac11c6e4db9703d8a6fdf688,
+        type: 3}
+      propertyPath: <SE_SwitchAround>k__BackingField.Guid.Data3
+      value: 2014246275
+      objectReference: {fileID: 0}
+    - target: {fileID: 4456806845262753563, guid: 49f1222dac11c6e4db9703d8a6fdf688,
+        type: 3}
+      propertyPath: <SE_SwitchAround>k__BackingField.Guid.Data4
+      value: 843458954
+      objectReference: {fileID: 0}
     - target: {fileID: 7461200545367134044, guid: 49f1222dac11c6e4db9703d8a6fdf688,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3782,8 +3807,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1222971039}
-  - {fileID: 1100880620}
   - {fileID: 2134020674}
+  - {fileID: 1100880620}
   - {fileID: 125690407}
   - {fileID: 287454042}
   - {fileID: 6796978278972373596}
