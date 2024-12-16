@@ -5,6 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 [SelectionBase]
 public class PlayerController : MonoBehaviour
@@ -383,7 +384,8 @@ public class PlayerController : MonoBehaviour
         //Handle screenchange to Player death Game Over TODO
 
         Debug.Log("you have died");
-        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
     }
     #endregion
 
