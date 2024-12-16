@@ -9,6 +9,7 @@ public class OverallApprovalManager : MonoBehaviour
     private List<NpcController> allNpcs = new List<NpcController>();
     private Dictionary< string, int> groupCounts = new Dictionary< string, int>();
     private Dictionary<string, int> stateCounts = new Dictionary< string, int>();
+    private Dictionary<NpcController, float> initialApproval = new Dictionary<NpcController, float>();
     [SerializeField] private TextMeshProUGUI overallApprovalPercentageValueF;
     [SerializeField] private TextMeshProUGUI overallApprovalPercentageValueB;
 
@@ -31,6 +32,14 @@ public class OverallApprovalManager : MonoBehaviour
         // always get the lates npc count in the scene
         allNpcs.Clear();
         allNpcs.AddRange(FindObjectsOfType<NpcController>());
+
+        foreach (NpcController npc in allNpcs)
+        {
+            if (!initialApproval.ContainsKey(npc))
+            {
+                initialApproval[npc] = npc.Approval;
+            }
+        }
     }
 
     private void UpdateOverallApproval()
@@ -147,6 +156,35 @@ public class OverallApprovalManager : MonoBehaviour
         return false;   
     }
 
+    private float CalculateAverageDeviation()
+    {
+        if (allNpcs.Count == 0) return 0;
+
+        float totalDeviation = 0f;
+
+        foreach (NpcController npc in allNpcs) 
+        {
+            if (initialApproval.TryGetValue(npc, out float initial))
+            {
+                totalDeviation += Mathf.Abs(npc.Approval - initial);
+            }
+        }
+
+        return totalDeviation / allNpcs.Count;
+
+    }
+
+    private string DetermineEscalationLevel(float averageDeviation)
+    {
+        if (averageDeviation < 10) return "calm"; // minimal deviation
+
+        if (averageDeviation < 30) return "soft"; // moderate deviation
+
+        if (averageDeviation < 60) return "middle"; // significant deviation
+
+        return "strong";                            // high deviation
+    }
+
     private void WinConditionMet()
     {
 
@@ -179,10 +217,11 @@ public class OverallApprovalManager : MonoBehaviour
         CountNpcsByGroup();
         CountNpcsByState();
 
+        //handle imbalance and win condition
         ImbalanceTicker();
-
         WinConditionMet();
 
+        // update ui
         overallApprovalPercentageValueF.text = overallApprovalPercentage.ToString("F0");
         overallApprovalPercentageValueB.text = overallApprovalPercentage.ToString("F0");
 
