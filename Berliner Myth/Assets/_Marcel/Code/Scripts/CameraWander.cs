@@ -1,21 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraWander : MonoBehaviour
 {
     #region TransformsForCamera
-    [SerializeField] Transform WanderingCameraTransform;
+    [SerializeField] public Transform WanderingCameraTransform;
     [SerializeField] Transform targetMain;
-    [SerializeField] Transform targetOptions;
+    [SerializeField] public Transform targetOptions;
     [SerializeField] Transform targetDevs;
     [SerializeField] Transform targetMusician;
     [SerializeField] Transform targetHowTo;
     #endregion
 
-    [SerializeField] GameObject SFX_Slider;
-    [SerializeField] GameObject Ambiente_Slider;
-    [SerializeField] GameObject Music_Slider;
+    //Buttons(Alpha at 0)
+    [SerializeField] public GameObject OptionsButton;
+    [SerializeField] public GameObject CampaignButton;
+    [SerializeField] public GameObject RunAwayButton;
+
+    //VolumeSliders
+    [SerializeField] public GameObject SFX_Slider;
+    [SerializeField] public GameObject Ambiente_Slider;
+    [SerializeField] public GameObject Music_Slider;
 
     #region RaycastStuff
     Ray ray;
@@ -48,7 +55,10 @@ public class CameraWander : MonoBehaviour
                 Target = hit.collider.gameObject;
                 //change camera position to position of an specific empty GameObject in CameraLocations
                 WanderingCameraTransform.position = targetMain.position; //Main Menu
-                //Debug.Log("Hit");
+                                                                         //Debug.Log("Hit");
+                OptionsButton.SetActive(true);
+                CampaignButton.SetActive(true);
+                RunAwayButton.SetActive(true);
 
                 SFX_Slider.SetActive(false);
                 Ambiente_Slider.SetActive(false);
@@ -62,6 +72,10 @@ public class CameraWander : MonoBehaviour
                 Target = hit.collider.gameObject;
                 WanderingCameraTransform.position = targetOptions.position;
 
+                OptionsButton.SetActive(false);
+                CampaignButton.SetActive(false);
+                RunAwayButton.SetActive(false);
+
                 SFX_Slider.SetActive(true);
                 Ambiente_Slider.SetActive(true);
                 Music_Slider.SetActive(true);
@@ -73,6 +87,10 @@ public class CameraWander : MonoBehaviour
             {
                 Target = hit.collider.gameObject;
                 WanderingCameraTransform.position = targetDevs.position;
+
+                OptionsButton.SetActive(false);
+                CampaignButton.SetActive(false);
+                RunAwayButton.SetActive(false);
 
                 SFX_Slider.SetActive(false);
                 Ambiente_Slider.SetActive(false);
@@ -87,6 +105,10 @@ public class CameraWander : MonoBehaviour
                 Target = hit.collider.gameObject;
                 WanderingCameraTransform.position = targetHowTo.position;
 
+                OptionsButton.SetActive(false);
+                CampaignButton.SetActive(false);
+                RunAwayButton.SetActive(false);
+
                 SFX_Slider.SetActive(false);
                 Ambiente_Slider.SetActive(false);
                 Music_Slider.SetActive(false);
@@ -94,6 +116,24 @@ public class CameraWander : MonoBehaviour
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.SE_SwitchAround, this.transform.position);
             }
         }
+    }
+    #endregion
+
+    //This are the Controls for the Options Button (A bit hacky, but it works)
+    #region SpecialCaseForButton(WanderingCamera)
+    public void MoveToOptionsFromButton()
+    {
+        WanderingCameraTransform.position = targetOptions.position;
+
+        OptionsButton.SetActive(false);
+        CampaignButton.SetActive(false);
+        RunAwayButton.SetActive(false);
+
+        SFX_Slider.SetActive(true);
+        Ambiente_Slider.SetActive(true);
+        Music_Slider.SetActive(true);
+
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.SE_SwitchAround, this.transform.position);
     }
     #endregion
 }

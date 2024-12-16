@@ -5,12 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class TitleScreenManager : MonoBehaviour
 {
-    public void PlayGame()
+	public void PlayGame()
 	{
-		//SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 	}
 
-	public void QuitGame ()
+	public void QuitGame()
 	{
 		Debug.Log("Quti!");
 		Application.Quit();
