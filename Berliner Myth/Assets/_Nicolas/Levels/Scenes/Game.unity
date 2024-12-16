@@ -2383,6 +2383,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 337647922}
   m_Mesh: {fileID: 2212009239438826721, guid: 074a95ec0e1bdef42bff36d85a647b5f, type: 3}
+--- !u!114 &341918582 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4456806845262753563, guid: 49f1222dac11c6e4db9703d8a6fdf688,
+    type: 3}
+  m_PrefabInstance: {fileID: 5424504586718956266}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e041d4ba1f09a49a78a9f2060174b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &349040536
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2945,6 +2957,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 459928384}
   m_Mesh: {fileID: -2228417370725966487, guid: 074a95ec0e1bdef42bff36d85a647b5f, type: 3}
+--- !u!114 &464673136 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4483096900684488882, guid: 49f1222dac11c6e4db9703d8a6fdf688,
+    type: 3}
+  m_PrefabInstance: {fileID: 5424504586718956266}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2615c34497e56514e89d610dee875972, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &477965011
 GameObject:
   m_ObjectHideFlags: 0
@@ -3088,9 +3112,10 @@ GameObject:
   - component: {fileID: 496329250}
   - component: {fileID: 496329249}
   - component: {fileID: 496329251}
+  - component: {fileID: 496329252}
   m_Layer: 0
   m_Name: Scene Manager
-  m_TagString: Untagged
+  m_TagString: Calm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3107,7 +3132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fc3da10e38a39442be3b03b0d8ff120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  area: 0
+  AudioManagerScript: {fileID: 464673136}
+  FMODEventsScript: {fileID: 341918582}
   overallApprovalPercentageValueF: {fileID: 1089947736}
   overallApprovalPercentageValueB: {fileID: 2005431908}
 --- !u!4 &496329250
@@ -3140,6 +3166,19 @@ MonoBehaviour:
   targetScenenName: Game
   fullscreenPassRendererFeatrue: {fileID: -1873353316077007959, guid: c40be3174f62c4acf8c1216858c64956,
     type: 2}
+--- !u!114 &496329252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496329248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 461d70754e074254c96b1a1136c528ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  area: 0
 --- !u!1 &497373150
 GameObject:
   m_ObjectHideFlags: 0
@@ -15720,6 +15759,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4483096900684488882, guid: 49f1222dac11c6e4db9703d8a6fdf688,
+        type: 3}
+      propertyPath: finalParameter
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4483096900684488882, guid: 49f1222dac11c6e4db9703d8a6fdf688,
+        type: 3}
+      propertyPath: OverallApprovalManagerScript
+      value: 
+      objectReference: {fileID: 496329249}
     - target: {fileID: 7461200545367134044, guid: 49f1222dac11c6e4db9703d8a6fdf688,
         type: 3}
       propertyPath: m_LocalPosition.x

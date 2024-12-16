@@ -19,7 +19,7 @@ public class FMODEvents : MonoBehaviour
 	[field: SerializeField] public EventReference ST_TitleScreen { get; private set; }
 
 	[field: Header("music")]
-	[field: SerializeField] public EventReference ST_InGame_Calm { get; private set; }
+	[field: SerializeField] public EventReference ST_InGame { get; private set; }
 
 	[field: Header("music")]
 	[field: SerializeField] public EventReference ST_Ending1 { get; private set; }

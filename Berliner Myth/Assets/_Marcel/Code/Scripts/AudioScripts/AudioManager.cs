@@ -8,6 +8,10 @@ using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
+    public OverallApprovalManager OverallApprovalManagerScript;
+    [Header("Area")]
+    [SerializeField] private EscalationCurve area;
+
     [Header("Volume")]
     [Range(0, 1)]
     public float masterVolume = 1;
@@ -18,6 +22,9 @@ public class AudioManager : MonoBehaviour
     [Range(0, 1)]
     public float SFXVolume = 1;
 
+    public string currentParameter;
+    public float finalParameter;
+
     private Bus masterBus;
     private Bus musicBus;
     private Bus ambienceBus;
@@ -27,7 +34,7 @@ public class AudioManager : MonoBehaviour
     private List<StudioEventEmitter> eventEmitters;
 
     private EventInstance ambienceEventInstance;
-    private EventInstance musicEventInstance;
+    public EventInstance musicEventInstance;
 
     public static AudioManager instance { get; private set; }
 
@@ -52,6 +59,7 @@ public class AudioManager : MonoBehaviour
     {
         InitializeAmbience(FMODEvents.instance.BackgroundNoise);
         MusicForThisScene();
+        InitializeMusic(FMODEvents.instance.ST_InGame);
     }
 
     private void Update()
@@ -68,20 +76,20 @@ public class AudioManager : MonoBehaviour
         ambienceEventInstance.start();
     }
 
-    private void InitializeMusic(EventReference musicEventReference)
+    public void InitializeMusic(EventReference musicEventReference)
     {
         musicEventInstance = CreateInstance(musicEventReference);
         musicEventInstance.start();
     }
 
-    public void SetAmbienceParameter(string parameterName, float parameterValue)
+    public void SetMusicParameter()
     {
-        ambienceEventInstance.setParameterByName(parameterName, parameterValue);
+        musicEventInstance.setParameterByName("EscalationCurve", finalParameter);
     }
 
     public void SetMusicArea(EscalationCurve area)
     {
-        musicEventInstance.setParameterByName("area", (float)area);
+        musicEventInstance.setParameterByName("EscalationCurve", (float)area);
     }
 
     public void PlayOneShot(EventReference sound, Vector3 worldPos)
@@ -130,11 +138,6 @@ public class AudioManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "TitleScene")
         {
             InitializeMusic(FMODEvents.instance.ST_TitleScreen);
-        }
-
-        if (SceneManager.GetActiveScene().name == "Game")
-        {
-            InitializeMusic(FMODEvents.instance.ST_InGame_Calm);
         }
         
         if (SceneManager.GetActiveScene().name == "EndingScene1")

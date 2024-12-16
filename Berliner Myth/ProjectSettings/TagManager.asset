@@ -13,6 +13,10 @@ TagManager:
   - Deko
   - NPC
   - MoveToHowTo
+  - Calm
+  - Escalation1
+  - Escalation2
+  - Escalation3
   layers:
   - Default
   - TransparentFX
