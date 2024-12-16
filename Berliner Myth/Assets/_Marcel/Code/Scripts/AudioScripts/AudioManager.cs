@@ -59,7 +59,11 @@ public class AudioManager : MonoBehaviour
     {
         InitializeAmbience(FMODEvents.instance.BackgroundNoise);
         MusicForThisScene();
-        InitializeMusic(FMODEvents.instance.ST_InGame);
+
+        if (SceneManager.GetActiveScene().name == "Game")
+        {
+            InitializeMusic(FMODEvents.instance.ST_InGame);
+        }
     }
 
     private void Update()

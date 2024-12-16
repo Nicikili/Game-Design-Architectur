@@ -184,11 +184,11 @@ public class OverallApprovalManager : MonoBehaviour
 
     private string DetermineEscalationLevel(float averageDeviation)
     {
-        if (averageDeviation < 10) return "calm"; // minimal deviation
+        if (averageDeviation < 25) return "calm"; // minimal deviation
 
-        if (averageDeviation < 30) return "soft"; // moderate deviation
+        if (averageDeviation < 45) return "soft"; // moderate deviation
 
-        if (averageDeviation < 60) return "middle"; // significant deviation
+        if (averageDeviation < 75) return "middle"; // significant deviation
 
         return "strong";                            // high deviation
     }
