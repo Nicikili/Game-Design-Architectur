@@ -276,6 +276,8 @@ public class OverallApprovalManager : MonoBehaviour
         float averageDeviation = CalculateAverageDeviation(); 
         UpdateMusic(averageDeviation);
 
+        Debug.Log(averageDeviation);
+
     }
 
     private void OnGUI()
