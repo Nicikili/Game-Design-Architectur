@@ -22,6 +22,8 @@ public class OverallApprovalManager : MonoBehaviour
 
     private float imbalanceTicker = 0f;
 
+    private string currentEscalationLevel = "calm";
+
     private void Start()
     {
         RefreshNpcList();
@@ -213,6 +215,42 @@ public class OverallApprovalManager : MonoBehaviour
         }
     }
 
+    private void UpdateMusic(float averageDeviation)
+    {
+        string newLevel = DetermineEscalationLevel(averageDeviation);
+
+        if (newLevel != currentEscalationLevel)
+        {
+            currentEscalationLevel = newLevel;
+
+            switch (currentEscalationLevel)
+            {
+                case "calm":
+                    //select lvl 1 escalation music
+                    Debug.Log("playing song 1");
+
+                    break;
+                case "soft":
+                    //select lvl 2 escalation music
+                    Debug.Log("playing song 2");
+
+                    break;
+                case "middle":
+                    //select lvl 3 escalation music
+                    Debug.Log("playing song 3");
+
+                    break;
+                case "strong":
+                    //select lvl 4 escalation music
+                    Debug.Log("playing song 4");
+
+                    break;
+            }
+
+            //ADD HERE PLAY() the music
+        }
+    }
+
     private void Update()
     {
         //update overall approval percentage every frame
@@ -224,9 +262,13 @@ public class OverallApprovalManager : MonoBehaviour
         ImbalanceTicker();
         WinConditionMet();
 
-        // update ui
+        //update ui
         overallApprovalPercentageValueF.text = overallApprovalPercentage.ToString("F0");
         overallApprovalPercentageValueB.text = overallApprovalPercentage.ToString("F0");
+
+        //adjust and play music
+        float averageDeviation = CalculateAverageDeviation(); 
+        UpdateMusic(averageDeviation);
 
     }
 
