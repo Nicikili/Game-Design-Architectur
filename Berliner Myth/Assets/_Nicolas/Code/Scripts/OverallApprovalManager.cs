@@ -307,7 +307,7 @@ public class OverallApprovalManager : MonoBehaviour
             );
 
         // Define Style
-        GUIStyle style = new GUIStyle(GUI.skin.label)
+      GUIStyle style = new GUIStyle(GUI.skin.label)
         {
             fontSize = 18,
             fontStyle = FontStyle.Bold,
@@ -336,7 +336,7 @@ public class OverallApprovalManager : MonoBehaviour
                 labelHeight
                 );
 
-            GUI.Label(groupLabelRect, $"{group.Key}: {group.Value}", style);
+            //GUI.Label(groupLabelRect, $"{group.Key}: {group.Value}", style);
             yOffset += labelHeight;
         }
 
@@ -349,7 +349,7 @@ public class OverallApprovalManager : MonoBehaviour
                 labelHeight
                 );
 
-            GUI.Label(stateLabelRect, $"{state.Key}: {state.Value}", style);
+            //GUI.Label(stateLabelRect, $"{state.Key}: {state.Value}", style);
             yOffset += labelHeight;
 
         }
