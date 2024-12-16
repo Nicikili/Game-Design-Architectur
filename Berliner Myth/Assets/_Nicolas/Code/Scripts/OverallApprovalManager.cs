@@ -202,18 +202,18 @@ public class OverallApprovalManager : MonoBehaviour
         if (overallApprovalPercentage >= 100) //if 100% approval achieved -> get to a win state
         {
 
-            Debug.Log("GameOver Incoming");
+            //Debug.Log("GameOver Incoming");
 
             if (groupsAreBalanced && deadPercentage < 25f)
             {
                 //neutral ending
-                Debug.Log("GAME OVER NEUTRAL");
+                //Debug.Log("GAME OVER NEUTRAL");
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
             }
             else
             {
                 //bad ending
-                Debug.Log("GAME OVER BAD");
+                //Debug.Log("GAME OVER BAD");
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 3);
             }
             
@@ -235,7 +235,7 @@ public class OverallApprovalManager : MonoBehaviour
                     AudioManager.instance.currentParameter = "Calm";
                     AudioManager.instance.SetMusicParameter();
                     //AudioManager.instance.SetMusicArea(area);
-                    Debug.Log("playing song 1");
+                    //Debug.Log("playing song 1");
 
                     break;
                 case "soft":
@@ -244,7 +244,7 @@ public class OverallApprovalManager : MonoBehaviour
                     AudioManager.instance.finalParameter += 1;
                     AudioManager.instance.SetMusicParameter();
                     //AudioManager.instance.SetMusicArea(area);
-                    Debug.Log("playing song 2");
+                    //Debug.Log("playing song 2");
 
                     break;
                 case "middle":
@@ -253,7 +253,7 @@ public class OverallApprovalManager : MonoBehaviour
                     AudioManager.instance.finalParameter += 1;
                     AudioManager.instance.SetMusicParameter();
                     //AudioManager.instance.SetMusicArea(area);
-                    Debug.Log("playing song 3");
+                    //Debug.Log("playing song 3");
 
                     break;
                 case "strong":
@@ -262,7 +262,7 @@ public class OverallApprovalManager : MonoBehaviour
                     AudioManager.instance.finalParameter += 1;
                     AudioManager.instance.SetMusicParameter();
                     //AudioManager.instance.SetMusicArea(EscalationCurve.Escalation3);
-                    Debug.Log("playing song 4");
+                    //Debug.Log("playing song 4");
 
                     break;
             }
@@ -290,7 +290,7 @@ public class OverallApprovalManager : MonoBehaviour
         float averageDeviation = CalculateAverageDeviation(); 
         UpdateMusic(averageDeviation);
 
-        Debug.Log(averageDeviation);
+        //Debug.Log(averageDeviation);
 
     }
 
