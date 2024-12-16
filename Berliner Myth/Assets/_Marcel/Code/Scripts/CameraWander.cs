@@ -13,6 +13,10 @@ public class CameraWander : MonoBehaviour
     [SerializeField] Transform targetHowTo;
     #endregion
 
+    [SerializeField] GameObject SFX_Slider;
+    [SerializeField] GameObject Ambiente_Slider;
+    [SerializeField] GameObject Music_Slider;
+
     #region RaycastStuff
     Ray ray;
 	RaycastHit hit;
@@ -45,6 +49,11 @@ public class CameraWander : MonoBehaviour
                 //change camera position to position of an specific empty GameObject in CameraLocations
                 WanderingCameraTransform.position = targetMain.position; //Main Menu
                 //Debug.Log("Hit");
+
+                SFX_Slider.SetActive(false);
+                Ambiente_Slider.SetActive(false);
+                Music_Slider.SetActive(false);
+
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.SE_SwitchAround, this.transform.position);
             }
 
@@ -52,6 +61,11 @@ public class CameraWander : MonoBehaviour
             {
                 Target = hit.collider.gameObject;
                 WanderingCameraTransform.position = targetOptions.position;
+
+                SFX_Slider.SetActive(true);
+                Ambiente_Slider.SetActive(true);
+                Music_Slider.SetActive(true);
+
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.SE_SwitchAround, this.transform.position);
             }
 
@@ -59,20 +73,24 @@ public class CameraWander : MonoBehaviour
             {
                 Target = hit.collider.gameObject;
                 WanderingCameraTransform.position = targetDevs.position;
+
+                SFX_Slider.SetActive(false);
+                Ambiente_Slider.SetActive(false);
+                Music_Slider.SetActive(false);
+
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.SE_SwitchAround, this.transform.position);
             }
 
-            if (hit.collider.gameObject.tag == "MoveToMusican") //Credit Menu Musican
-            {
-                Target = hit.collider.gameObject;
-                WanderingCameraTransform.position = targetMusician.position;
-                AudioManager.instance.PlayOneShot(FMODEvents.instance.SE_SwitchAround, this.transform.position);
-            }
 
             if (hit.collider.gameObject.tag == "MoveToHowTo") //Controls Menu Screen
             {
                 Target = hit.collider.gameObject;
                 WanderingCameraTransform.position = targetHowTo.position;
+
+                SFX_Slider.SetActive(false);
+                Ambiente_Slider.SetActive(false);
+                Music_Slider.SetActive(false);
+
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.SE_SwitchAround, this.transform.position);
             }
         }
