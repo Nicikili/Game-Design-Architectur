@@ -71,7 +71,7 @@ MonoBehaviour:
       Data2: 1161632131
       Data3: -1815492940
       Data4: -158392881
-    Path: event:/InGame/Soundtrack/InGameMusic
+    Path: event:/InGame/Soundtrack/EscalationCurve
   <ST_Ending1>k__BackingField:
     Guid:
       Data1: 961027387
@@ -138,7 +138,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2615c34497e56514e89d610dee875972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OverallApprovalManagerScript: {fileID: 0}
+  area: 0
   masterVolume: 1
   musicVolume: 1
   ambienceVolume: 1
   SFXVolume: 1
+  currentParameter: 
+  finalParameter: 0
