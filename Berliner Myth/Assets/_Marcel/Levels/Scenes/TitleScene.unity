@@ -1917,6 +1917,9 @@ MonoBehaviour:
   targetDevs: {fileID: 770095863}
   targetMusician: {fileID: 932644909}
   targetHowTo: {fileID: 898460982}
+  OptionsButton: {fileID: 0}
+  CampaignButton: {fileID: 0}
+  RunAwayButton: {fileID: 0}
   SFX_Slider: {fileID: 0}
   Ambiente_Slider: {fileID: 0}
   Music_Slider: {fileID: 0}
@@ -3721,6 +3724,9 @@ MonoBehaviour:
   targetDevs: {fileID: 770095863}
   targetMusician: {fileID: 932644909}
   targetHowTo: {fileID: 898460982}
+  OptionsButton: {fileID: 1876463741}
+  CampaignButton: {fileID: 2036612577}
+  RunAwayButton: {fileID: 1383829290}
   SFX_Slider: {fileID: 1228292511}
   Ambiente_Slider: {fileID: 372271280}
   Music_Slider: {fileID: 1494454502}
@@ -4967,7 +4973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6442,7 +6448,7 @@ GameObject:
   - component: {fileID: 1876463743}
   m_Layer: 0
   m_Name: OptionsButton
-  m_TagString: Untagged
+  m_TagString: MoveToOptions
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6463,8 +6469,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 1128.4336, y: 432}
+  m_SizeDelta: {x: 281.624, y: 54.7371}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1876463743
 MonoBehaviour:
@@ -6509,7 +6515,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1876463744}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1100880621}
+        m_TargetAssemblyTypeName: CameraWander, Assembly-CSharp
+        m_MethodName: MoveToOptionsFromButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1876463744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6523,7 +6541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6846,8 +6864,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 992.8599, y: 316.69287}
+  m_SizeDelta: {x: 580.5303, y: 100.0884}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2036612579
 MonoBehaviour:
@@ -6892,7 +6910,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2036612580}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1069700465}
+        m_TargetAssemblyTypeName: TitleScreenManager, Assembly-CSharp
+        m_MethodName: PlayGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2036612580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6906,7 +6936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7358,6 +7388,9 @@ MonoBehaviour:
   targetDevs: {fileID: 770095863}
   targetMusician: {fileID: 932644909}
   targetHowTo: {fileID: 898460982}
+  OptionsButton: {fileID: 0}
+  CampaignButton: {fileID: 0}
+  RunAwayButton: {fileID: 0}
   SFX_Slider: {fileID: 0}
   Ambiente_Slider: {fileID: 0}
   Music_Slider: {fileID: 0}
