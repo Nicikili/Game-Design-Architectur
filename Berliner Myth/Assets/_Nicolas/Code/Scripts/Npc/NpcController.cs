@@ -209,7 +209,7 @@ public class NpcController : MonoBehaviour
 
             string npcState = wanderComponent != null ? wanderComponent.GetCurrentState() : "Unknown";
 
-            GUI.Label(rect, $"{GroupName}: {Approval:F0}\nState: {npcState}\nHit: {CurrentHealth}", style );
+            //GUI.Label(rect, $"{GroupName}: {Approval:F0}\nState: {npcState}\nHit: {CurrentHealth}", style );
         }
     }
 }

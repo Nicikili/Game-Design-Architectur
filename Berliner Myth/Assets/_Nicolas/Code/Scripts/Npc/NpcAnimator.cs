@@ -8,23 +8,45 @@ public class NpcAnimator : NpcComponent
 {
 
     [SerializeField] private float squishAmount = 0.8f; //scale factor of the squish
-    [SerializeField] private float duration = 0.5f; //duration of the squish cycle
+    [SerializeField] private float bobAmount = 0.1f; // Amount to move up and down
+    [SerializeField] private float duration = 1.5f; //duration of the squish cycle
+
+    [SerializeField] private Transform animatedPart;
 
     private Vector3 originalScale;
-    private void Update()
-    {
-        //store npc's origninal scale
-        originalScale = transform.localScale;
+    private Vector3 originalPosition;
 
-        //starz the squish loop
-        StartSquishAnimation();
+    private void Start()
+    {
+
+        if (animatedPart != null)
+        {
+            DOTween.SetTweensCapacity(2500, 50);
+
+            //store npc's origninal scale
+            originalScale = animatedPart.localScale;
+            originalPosition = animatedPart.localPosition;
+
+            //starz the squish loop
+            StartSquishAnimation();
+        }
     }
 
     private void StartSquishAnimation()
     {
+
+        float randomDelay = Random.Range(0f, duration); // Randomize delay within the duration range
+
         //create looping animation:
-        transform.DOScale(new Vector3(originalScale.x, originalScale.y * squishAmount, originalScale.z), duration)
+        animatedPart.DOScale(new Vector3(originalScale.x, originalScale.y * squishAmount, originalScale.z), duration)
             .SetEase(Ease.InOutSine) //smooooooth
-            .SetLoops(-1, LoopType.Yoyo);
+            .SetLoops(-1, LoopType.Yoyo)
+            .SetDelay(randomDelay); // Random start delay
+
+        animatedPart.DOLocalMove(new Vector3(originalPosition.x, originalPosition.y + bobAmount, originalPosition.z), duration)
+            .SetEase(Ease.InOutSine)
+            .SetLoops(-1, LoopType.Yoyo)
+            .SetDelay(randomDelay); // Random start delay
+
     }
 }
