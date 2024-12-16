@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class OverallApprovalManager : MonoBehaviour
 {
+    [Header("Area")]
+    [SerializeField] private EscalationCurve area;
 
     private List<NpcController> allNpcs = new List<NpcController>();
     private Dictionary< string, int> groupCounts = new Dictionary< string, int>();
@@ -227,21 +229,25 @@ public class OverallApprovalManager : MonoBehaviour
             {
                 case "calm":
                     //select lvl 1 escalation music
+                    AudioManager.instance.SetMusicArea(area);
                     Debug.Log("playing song 1");
 
                     break;
                 case "soft":
                     //select lvl 2 escalation music
+                    AudioManager.instance.SetMusicArea(area);
                     Debug.Log("playing song 2");
 
                     break;
                 case "middle":
                     //select lvl 3 escalation music
+                    AudioManager.instance.SetMusicArea(area);
                     Debug.Log("playing song 3");
 
                     break;
                 case "strong":
                     //select lvl 4 escalation music
+                    AudioManager.instance.SetMusicArea(area);
                     Debug.Log("playing song 4");
 
                     break;
