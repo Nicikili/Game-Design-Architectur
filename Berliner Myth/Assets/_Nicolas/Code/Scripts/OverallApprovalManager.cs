@@ -117,7 +117,11 @@ public class OverallApprovalManager : MonoBehaviour
 
     private void ImbalanceTicker()
     {
-        if (groupCounts.Count < 2) return;
+        if (groupCounts.Count < 2)
+        { 
+        overallApprovalPercentage = 100;
+        return;
+        }
 
         //Find the differnce between the largest and smallest groups
 
@@ -134,9 +138,9 @@ public class OverallApprovalManager : MonoBehaviour
 
         //If imbalance exceeds a threshold, start adjusting approval
 
-        if (imbalance > 15) //threshold for imbalance
+        if (imbalance > 10) //threshold for imbalance
         {
-            float adjustmentRate = imbalance * 0.01f; //scale adjustment for imbalance ticker
+            float adjustmentRate = imbalance * 0.1f; //scale adjustment for imbalance ticker
             imbalanceTicker += adjustmentRate * Time.deltaTime;
 
             overallApprovalPercentage = Mathf.Clamp(overallApprovalPercentage + Mathf.RoundToInt(imbalanceTicker), -100, 100);
@@ -184,11 +188,11 @@ public class OverallApprovalManager : MonoBehaviour
 
     private string DetermineEscalationLevel(float averageDeviation)
     {
-        if (averageDeviation < 25) return "calm"; // minimal deviation
+        if (averageDeviation < 20) return "calm"; // minimal deviation
 
-        if (averageDeviation < 45) return "soft"; // moderate deviation
+        if (averageDeviation < 40) return "soft"; // moderate deviation
 
-        if (averageDeviation < 75) return "middle"; // significant deviation
+        if (averageDeviation < 60) return "middle"; // significant deviation
 
         return "strong";                            // high deviation
     }
@@ -289,8 +293,6 @@ public class OverallApprovalManager : MonoBehaviour
         //adjust and play music
         float averageDeviation = CalculateAverageDeviation(); 
         UpdateMusic(averageDeviation);
-
-        //Debug.Log(averageDeviation);
 
     }
 
