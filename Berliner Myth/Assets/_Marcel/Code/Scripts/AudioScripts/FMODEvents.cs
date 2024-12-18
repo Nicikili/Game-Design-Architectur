@@ -42,15 +42,11 @@ public class FMODEvents : MonoBehaviour
 	#region Player
 	[field: Header("player")]
 	[field: SerializeField] public EventReference VL_Player_Speech { get; private set; }
-
-	[field: Header("player")]
 	[field: SerializeField] public EventReference VL_Player_ScreamsInPain { get; private set; }
-
-	[field: Header("player")]
 	[field: SerializeField] public EventReference SE_Player_TakeBox { get; private set; }
-
-	[field: Header("player")]
 	[field: SerializeField] public EventReference SE_Player_PlaceBox { get; private set; }
+	[field: SerializeField] public EventReference SE_Player_FahneAufstellen { get; private set; }
+	[field: SerializeField] public EventReference SE_Player_FahneAbbauen { get; private set; }
 	#endregion
 
 

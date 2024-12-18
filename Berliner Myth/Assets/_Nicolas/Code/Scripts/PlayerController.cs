@@ -203,6 +203,7 @@ public class PlayerController : MonoBehaviour
 
     private void BlueSpeechPerformed(InputAction.CallbackContext ctx)
     {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.SE_Player_FahneAufstellen, this.transform.position);
         if (isSpeaking)
         {
             BlueSpeech();
@@ -219,11 +220,13 @@ public class PlayerController : MonoBehaviour
             blue.SetActive(false);
 
             startSpeech =false;
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.SE_Player_FahneAbbauen, this.transform.position);
         }
     }
 
     private void RedSpeechPerformed(InputAction.CallbackContext ctx)
     {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.SE_Player_FahneAufstellen, this.transform.position);
         if (isSpeaking)
         {
             RedSpeech();
@@ -239,6 +242,7 @@ public class PlayerController : MonoBehaviour
             red.SetActive(false);
 
             startSpeech = false;
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.SE_Player_FahneAbbauen, this.transform.position);
         }
     }
 

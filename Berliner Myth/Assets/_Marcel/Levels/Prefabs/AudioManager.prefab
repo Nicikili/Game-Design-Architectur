@@ -135,6 +135,20 @@ MonoBehaviour:
       Data3: -497915986
       Data4: 1844944390
     Path: event:/Player/SE_Player_PlaceBox
+  <SE_Player_FahneAufstellen>k__BackingField:
+    Guid:
+      Data1: -2066314858
+      Data2: 1168766781
+      Data3: 1464133307
+      Data4: -2122610575
+    Path: event:/Player/SE_Player_FahneAufstellen
+  <SE_Player_FahneAbbauen>k__BackingField:
+    Guid:
+      Data1: 1634913083
+      Data2: 1277420547
+      Data3: 1449277323
+      Data4: 23896177
+    Path: event:/Player/SE_Player_FahneAbbauen
 --- !u!1 &4219182810948935828
 GameObject:
   m_ObjectHideFlags: 0
