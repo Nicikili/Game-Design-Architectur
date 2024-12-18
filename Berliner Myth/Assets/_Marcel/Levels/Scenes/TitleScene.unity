@@ -522,7 +522,7 @@ GameObject:
   - component: {fileID: 140066018}
   m_Layer: 0
   m_Name: ControlsTitle_YesEveryone (4)
-  m_TagString: MoveToHowTo
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1459,6 +1459,7 @@ GameObject:
   m_Component:
   - component: {fileID: 372271281}
   - component: {fileID: 372271282}
+  - component: {fileID: 372271283}
   m_Layer: 5
   m_Name: Ambiente_Slider
   m_TagString: Untagged
@@ -1538,7 +1539,32 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 372271283}
+        m_TargetAssemblyTypeName: VolumeSlider, Assembly-CSharp
+        m_MethodName: OnSliderValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &372271283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372271280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92620c4f474a2a546a8f71d85b5b530f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeType: 1
 --- !u!1 &388590584
 GameObject:
   m_ObjectHideFlags: 0
@@ -1552,7 +1578,7 @@ GameObject:
   - component: {fileID: 388590587}
   m_Layer: 0
   m_Name: StarBlue_YE (1)
-  m_TagString: MoveToOptions
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2005,7 +2031,7 @@ GameObject:
   - component: {fileID: 603629620}
   m_Layer: 0
   m_Name: ControlsTitle_YesEveryone (3)
-  m_TagString: MoveToHowTo
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2533,7 +2559,7 @@ GameObject:
   - component: {fileID: 857856634}
   m_Layer: 0
   m_Name: ControlsTitle_YesEveryone (2)
-  m_TagString: MoveToHowTo
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3848,6 +3874,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1228292512}
   - component: {fileID: 1228292513}
+  - component: {fileID: 1228292514}
   m_Layer: 5
   m_Name: SFX_Slider
   m_TagString: Untagged
@@ -3927,7 +3954,32 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1228292514}
+        m_TargetAssemblyTypeName: VolumeSlider, Assembly-CSharp
+        m_MethodName: OnSliderValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1228292514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228292511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92620c4f474a2a546a8f71d85b5b530f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeType: 2
 --- !u!1 &1312230980
 GameObject:
   m_ObjectHideFlags: 0
@@ -4757,6 +4809,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1494454503}
   - component: {fileID: 1494454504}
+  - component: {fileID: 1494454505}
   m_Layer: 5
   m_Name: Music_Slider
   m_TagString: Untagged
@@ -4836,7 +4889,32 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1494454505}
+        m_TargetAssemblyTypeName: VolumeSlider, Assembly-CSharp
+        m_MethodName: OnSliderValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1494454505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494454502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92620c4f474a2a546a8f71d85b5b530f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeType: 0
 --- !u!1 &1635643330
 GameObject:
   m_ObjectHideFlags: 0
@@ -5039,7 +5117,7 @@ GameObject:
   - component: {fileID: 1707898355}
   m_Layer: 0
   m_Name: ControlsTitle_YesEveryone (5)
-  m_TagString: MoveToHowTo
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

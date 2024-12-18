@@ -13,8 +13,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private EscalationCurve area;
 
     [Header("Volume")]
-    [Range(0, 1)]
-    public float masterVolume = 1;
+    //[Range(0, 1)]
+    //public float masterVolume = 1;
     [Range(0, 1)]
     public float musicVolume = 1;
     [Range(0, 1)]
@@ -25,7 +25,7 @@ public class AudioManager : MonoBehaviour
     public string currentParameter;
     public float finalParameter;
 
-    private Bus masterBus;
+    //private Bus masterBus;
     private Bus musicBus;
     private Bus ambienceBus;
     private Bus sfxBus;
@@ -51,9 +51,9 @@ public class AudioManager : MonoBehaviour
         eventEmitters = new List<StudioEventEmitter>();
 
         //masterBus = RuntimeManager.GetBus("bus:/");
-        //musicBus = RuntimeManager.GetBus("bus:/Music");
-        //ambienceBus = RuntimeManager.GetBus("bus:/Ambience");
-        //sfxBus = RuntimeManager.GetBus("bus:/SFX");
+        musicBus = RuntimeManager.GetBus("bus:/Music");
+        ambienceBus = RuntimeManager.GetBus("bus:/Ambience");
+        sfxBus = RuntimeManager.GetBus("bus:/SFX");
     }
 
     private void Start()
@@ -69,9 +69,9 @@ public class AudioManager : MonoBehaviour
     private void Update()
     {
         //masterBus.setVolume(masterVolume);
-        //musicBus.setVolume(musicVolume);
-        //ambienceBus.setVolume(ambienceVolume);
-        //sfxBus.setVolume(SFXVolume);
+        musicBus.setVolume(musicVolume);
+        ambienceBus.setVolume(ambienceVolume);
+        sfxBus.setVolume(SFXVolume);
     }
 
     private void InitializeAmbient(EventReference ambientEventReference)
