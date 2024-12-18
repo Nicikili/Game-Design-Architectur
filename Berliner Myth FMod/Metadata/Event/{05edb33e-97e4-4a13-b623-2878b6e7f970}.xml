@@ -163,7 +163,7 @@
 	</object>
 	<object class="SoundScatterer" id="{b97b697a-359a-47cc-b8c6-f596236247ec}">
 		<property name="start">
-			<value>8</value>
+			<value>2</value>
 		</property>
 		<property name="length">
 			<value>2</value>

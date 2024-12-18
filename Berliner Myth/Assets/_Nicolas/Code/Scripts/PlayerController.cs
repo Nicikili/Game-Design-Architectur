@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
 	private void Start()
 	{
         playerTalksAudio = AudioManager.instance.CreateInstance(FMODEvents.instance.VL_Player_Speech);
-	}
+    }
 
 	private void Update()
     {
@@ -134,9 +134,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isSpeaking && agent.enabled) //Check if the Player is Speaking, aka has clicked on Space
         {
-
             Move(); // Call Move() when the left mouse button is clicked
-
         }
     }
 
@@ -444,5 +442,15 @@ public class PlayerController : MonoBehaviour
 		{
             playerTalksAudio.stop(STOP_MODE.ALLOWFADEOUT);
 		}
-	}
+    }
+
+    public class FmodExtensions
+    {
+        public static bool IsPlaying(FMOD.Studio.EventInstance instance)
+        {
+            FMOD.Studio.PLAYBACK_STATE state;
+            instance.getPlaybackState(out state);
+            return state != FMOD.Studio.PLAYBACK_STATE.STOPPED;
+        }
+    }
 }

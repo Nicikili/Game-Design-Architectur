@@ -10,10 +10,7 @@ public class FMODEvents : MonoBehaviour
 	[field: SerializeField] public EventReference SE_SwitchAround { get; private set; }
 
 	[field: Header("UI")]
-	[field: SerializeField] public EventReference SE_ApprovalGoesUp { get; private set; }
-
-	[field: Header("UI")]
-	[field: SerializeField] public EventReference SE_ApprovalGoesDown { get; private set; }
+	[field: SerializeField] public EventReference SE_MouseKlick { get; private set; }
 
 	#region ambiente
 	[field: Header("ambiente")]

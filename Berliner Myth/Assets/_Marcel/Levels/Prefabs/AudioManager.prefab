@@ -51,20 +51,13 @@ MonoBehaviour:
       Data3: 2014246275
       Data4: 843458954
     Path: event:/SE_SwitchAround
-  <SE_ApprovalGoesUp>k__BackingField:
+  <SE_MouseKlick>k__BackingField:
     Guid:
-      Data1: 1575125308
-      Data2: 1336785940
-      Data3: 1866896284
-      Data4: -750837642
-    Path: event:/UI/SE_ApprovalBarUp
-  <SE_ApprovalGoesDown>k__BackingField:
-    Guid:
-      Data1: 713813703
-      Data2: 1329808956
-      Data3: -2059235173
-      Data4: -2128469192
-    Path: event:/UI/SE_ApprovalBarDown
+      Data1: -1968387395
+      Data2: 1287173609
+      Data3: -1484746072
+      Data4: -853984063
+    Path: event:/UI/SE_MouseKlick
   <BackgroundNoise>k__BackingField:
     Guid:
       Data1: 99463998

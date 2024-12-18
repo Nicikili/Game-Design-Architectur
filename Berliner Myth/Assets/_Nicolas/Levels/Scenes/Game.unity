@@ -15815,6 +15815,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4456806845262753563, guid: 49f1222dac11c6e4db9703d8a6fdf688,
+        type: 3}
+      propertyPath: <VL_Player_Speech>k__BackingField.Guid.Data1
+      value: 1434879258
+      objectReference: {fileID: 0}
+    - target: {fileID: 4456806845262753563, guid: 49f1222dac11c6e4db9703d8a6fdf688,
+        type: 3}
+      propertyPath: <VL_Player_Speech>k__BackingField.Guid.Data2
+      value: 1117436684
+      objectReference: {fileID: 0}
+    - target: {fileID: 4456806845262753563, guid: 49f1222dac11c6e4db9703d8a6fdf688,
+        type: 3}
+      propertyPath: <VL_Player_Speech>k__BackingField.Guid.Data3
+      value: 1130292630
+      objectReference: {fileID: 0}
+    - target: {fileID: 4456806845262753563, guid: 49f1222dac11c6e4db9703d8a6fdf688,
+        type: 3}
+      propertyPath: <VL_Player_Speech>k__BackingField.Guid.Data4
+      value: 606419255
+      objectReference: {fileID: 0}
     - target: {fileID: 4483096900684488882, guid: 49f1222dac11c6e4db9703d8a6fdf688,
         type: 3}
       propertyPath: finalParameter
