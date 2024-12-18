@@ -5090,6 +5090,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 492853254372133009, guid: a4986943cc35aa445bc257495173d4c1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 66c98d0011e4b5d4488822d0616e9830, type: 2}
     - target: {fileID: 1047130197356390033, guid: a4986943cc35aa445bc257495173d4c1,
         type: 3}
       propertyPath: speechBar
@@ -5175,6 +5180,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 9219184615903513836, guid: a4986943cc35aa445bc257495173d4c1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 66c98d0011e4b5d4488822d0616e9830, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
