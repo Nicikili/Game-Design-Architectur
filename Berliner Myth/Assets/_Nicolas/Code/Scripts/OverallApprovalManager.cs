@@ -288,6 +288,7 @@ public class OverallApprovalManager : MonoBehaviour
 
         //update ui
         overallApprovalPercentageValueF.text = overallApprovalPercentage.ToString("F0");
+
         overallApprovalPercentageValueB.text = overallApprovalPercentage.ToString("F0");
 
         //adjust and play music

@@ -1064,6 +1064,7 @@ public class NpcWander : NpcComponent
         }
         else if (state == Estate.Convert)
         {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.VL_NPC_GoesToOtherNPC, this.transform.position);
             npc.agent.isStopped = false;
 
             npc.agent.speed = 3.5f;

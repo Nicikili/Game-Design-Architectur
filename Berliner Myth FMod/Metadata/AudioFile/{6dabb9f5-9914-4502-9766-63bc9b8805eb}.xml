@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
-	<object class="AudioFile" id="{8939bbb6-c508-44bf-8c8a-6160b294deec}">
+	<object class="AudioFile" id="{6dabb9f5-9914-4502-9766-63bc9b8805eb}">
 		<property name="assetPath">
-			<value>VL_NPC_GoesToOtherNPC.wav</value>
+			<value>SE_ApprovalBarDown.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>
@@ -11,7 +11,7 @@
 			<value>2</value>
 		</property>
 		<property name="length">
-			<value>1.0449433106575963</value>
+			<value>0.27569160997732428</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{e1b9a853-09cc-4fe8-b08c-50dc6b1f0748}</destination>

@@ -51,6 +51,20 @@ MonoBehaviour:
       Data3: 2014246275
       Data4: 843458954
     Path: event:/SE_SwitchAround
+  <SE_ApprovalGoesUp>k__BackingField:
+    Guid:
+      Data1: 1575125308
+      Data2: 1336785940
+      Data3: 1866896284
+      Data4: -750837642
+    Path: event:/UI/SE_ApprovalBarUp
+  <SE_ApprovalGoesDown>k__BackingField:
+    Guid:
+      Data1: 713813703
+      Data2: 1329808956
+      Data3: -2059235173
+      Data4: -2128469192
+    Path: event:/UI/SE_ApprovalBarDown
   <BackgroundNoise>k__BackingField:
     Guid:
       Data1: 99463998
@@ -93,6 +107,41 @@ MonoBehaviour:
       Data3: 368201652
       Data4: -1778467771
     Path: event:/EndingScene/Soundtrack/Tragisches Ende
+  <VL_NPC_GoesToOtherNPC>k__BackingField:
+    Guid:
+      Data1: -1438797553
+      Data2: 1161679284
+      Data3: 1732237708
+      Data4: 951303320
+    Path: event:/VL_NPC_GoesToOtherNPC
+  <VL_Player_Speech>k__BackingField:
+    Guid:
+      Data1: 192396436
+      Data2: 1087474796
+      Data3: 1493101718
+      Data4: -736190620
+    Path: event:/Player/SE_Player_Speech
+  <VL_Player_ScreamsInPain>k__BackingField:
+    Guid:
+      Data1: -1319673788
+      Data2: 1282017740
+      Data3: -608910657
+      Data4: 1821968444
+    Path: event:/Player/VP_Player_ScreamsInPain
+  <SE_Player_TakeBox>k__BackingField:
+    Guid:
+      Data1: -799476164
+      Data2: 1084891098
+      Data3: -1489374071
+      Data4: 258105009
+    Path: event:/Player/SE_Player_TakeBox
+  <SE_Player_PlaceBox>k__BackingField:
+    Guid:
+      Data1: -569124833
+      Data2: 1239633205
+      Data3: -497915986
+      Data4: 1844944390
+    Path: event:/Player/SE_Player_PlaceBox
 --- !u!1 &4219182810948935828
 GameObject:
   m_ObjectHideFlags: 0

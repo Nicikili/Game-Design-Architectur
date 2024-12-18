@@ -252,7 +252,7 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(forwardDirection);
 
         //Start Animation On Box
-
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.SE_Player_PlaceBox, this.transform.position);
         animator.SetBool("IsBox", true);
 
 
@@ -273,7 +273,7 @@ public class PlayerController : MonoBehaviour
         agent.updateRotation = true;
 
         //Stop Animation On Box
-
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.SE_Player_TakeBox, this.transform.position);
         animator.SetBool("IsBox", false);
 
     }
@@ -297,7 +297,7 @@ public class PlayerController : MonoBehaviour
         red.SetActive(false);
 
         startSpeech = true;
-
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.VL_Player_Speech, this.transform.position);
         activeSpeechGroup = "Blue";
     }
 
@@ -313,6 +313,7 @@ public class PlayerController : MonoBehaviour
         blue.SetActive(false);
 
         startSpeech = true;
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.VL_Player_Speech, this.transform.position);
 
         activeSpeechGroup = "Red";
     }
@@ -325,6 +326,7 @@ public class PlayerController : MonoBehaviour
         blue.SetActive(false);
 
         startSpeech = false;
+        
 
         activeSpeechGroup = "None";
     }
@@ -370,6 +372,7 @@ public class PlayerController : MonoBehaviour
     }
     public void PlayerTakenDamage(float damage)
     {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.VL_Player_ScreamsInPain, this.transform.position);
         currentHealt -= damage;
         currentHealt = Mathf.Clamp(currentHealt, 0, maxHealth);
 
