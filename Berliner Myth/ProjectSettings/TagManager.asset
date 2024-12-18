@@ -20,6 +20,7 @@ TagManager:
   - StartGame
   - Quit
   - Options
+  - Start
   layers:
   - Default
   - TransparentFX

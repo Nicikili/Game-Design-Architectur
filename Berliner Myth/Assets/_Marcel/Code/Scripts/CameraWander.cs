@@ -56,6 +56,7 @@ public class CameraWander : MonoBehaviour
                 //change camera position to position of an specific empty GameObject in CameraLocations
                 WanderingCameraTransform.position = targetMain.position; //Main Menu
                                                                          //Debug.Log("Hit");
+
                 OptionsButton.SetActive(true);
                 CampaignButton.SetActive(true);
                 RunAwayButton.SetActive(true);
@@ -112,6 +113,22 @@ public class CameraWander : MonoBehaviour
                 SFX_Slider.SetActive(false);
                 Ambiente_Slider.SetActive(false);
                 Music_Slider.SetActive(false);
+
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.SE_SwitchAround, this.transform.position);
+            }
+
+            if (hit.collider.gameObject.tag == "Start") //Controls Menu Screen
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.SE_SwitchAround, this.transform.position);
+            }
+
+
+            if (hit.collider.gameObject.tag == "Quit") //Controls Menu Screen
+            {
+                Debug.Log("Quti!");
+                Application.Quit();
 
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.SE_SwitchAround, this.transform.position);
             }
