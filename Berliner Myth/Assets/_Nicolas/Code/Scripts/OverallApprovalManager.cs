@@ -218,8 +218,31 @@ public class OverallApprovalManager : MonoBehaviour
             {
                 //bad ending
                 //Debug.Log("GAME OVER BAD");
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 3);
+                string dominantGroup = null;
+                int maxCount = 0;
+
+                foreach (var group in groupCounts)
+                {
+                    if (group.Value > maxCount)
+                    {
+                        maxCount = group.Value;
+                        dominantGroup = group.Key;
+                    }
+                }
+
+                if (dominantGroup != null)
+                {
+                    if (dominantGroup == "Blue") //Blue Bad ending
+                    {
+                        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 3);
+                    }
+                    if (dominantGroup == "Red") //Red Bad ending
+                    {
+                        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 4);
+                    }
+                }
             }
+
             
         }
     }

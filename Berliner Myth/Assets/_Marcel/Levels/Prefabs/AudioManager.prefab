@@ -50,7 +50,14 @@ MonoBehaviour:
       Data2: 1230533377
       Data3: 2014246275
       Data4: 843458954
-    Path: event:/SE_SwitchAround
+    Path: event:/UI/SE_SwitchAround
+  <SE_EnergyRefill>k__BackingField:
+    Guid:
+      Data1: -1064226788
+      Data2: 1339667680
+      Data3: 1934779782
+      Data4: 1992200527
+    Path: event:/UI/SE_EnergyRefill
   <SE_MouseKlick>k__BackingField:
     Guid:
       Data1: -1968387395
@@ -116,11 +123,11 @@ MonoBehaviour:
     Path: event:/Player/SE_Player_Speech
   <VL_Player_ScreamsInPain>k__BackingField:
     Guid:
-      Data1: -1319673788
-      Data2: 1282017740
-      Data3: -608910657
-      Data4: 1821968444
-    Path: event:/Player/VP_Player_ScreamsInPain
+      Data1: -1580741161
+      Data2: 1157390487
+      Data3: 256186266
+      Data4: 709325099
+    Path: event:/Player/VL_Player_ScreamsInPain
   <SE_Player_TakeBox>k__BackingField:
     Guid:
       Data1: -799476164
@@ -149,6 +156,13 @@ MonoBehaviour:
       Data3: 1449277323
       Data4: 23896177
     Path: event:/Player/SE_Player_FahneAbbauen
+  <SE_Player_Dies>k__BackingField:
+    Guid:
+      Data1: 1439704759
+      Data2: 1202281687
+      Data3: -1112314715
+      Data4: -635537293
+    Path: event:/Player/VL_Player_Dies
 --- !u!1 &4219182810948935828
 GameObject:
   m_ObjectHideFlags: 0

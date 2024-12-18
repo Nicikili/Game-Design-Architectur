@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
 
     //audio
     private EventInstance playerTalksAudio;
+    private bool alreadyTriggered = true;
 
     private void Awake()
     {
@@ -91,6 +92,12 @@ public class PlayerController : MonoBehaviour
         }
 
         currentHealthValue.text = currentHealt.ToString("F0");
+
+        if (currentSpeechTime == maxSpeechDuration && alreadyTriggered == false)
+		{
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.SE_EnergyRefill, this.transform.position);
+            alreadyTriggered = true;
+        }
     }
 
     #region Manage Subscription
@@ -352,10 +359,11 @@ public class PlayerController : MonoBehaviour
         {
             currentSpeechTime += Time.deltaTime / speechCoolDown * maxSpeechDuration;
             UpdateSpeechBar();
+            alreadyTriggered = false;
         }
         else
         {
-            currentSpeechTime =  maxSpeechDuration;
+            currentSpeechTime = maxSpeechDuration;
             isCoolingDown = false;
         }
     }
@@ -386,6 +394,7 @@ public class PlayerController : MonoBehaviour
 
         if (currentHealt <= 0)
         {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.VL_Player_Dies, this.transform.position);
             Die();
         }
     }

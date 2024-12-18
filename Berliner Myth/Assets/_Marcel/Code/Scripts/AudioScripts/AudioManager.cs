@@ -146,6 +146,7 @@ public class AudioManager : MonoBehaviour
         
         if (SceneManager.GetActiveScene().name == "EndingScene1")
         {
+            instance.PlayOneShot(FMODEvents.instance.VL_Player_Dies, this.transform.position);
             InitializeMusic(FMODEvents.instance.ST_Ending1);
         }
 

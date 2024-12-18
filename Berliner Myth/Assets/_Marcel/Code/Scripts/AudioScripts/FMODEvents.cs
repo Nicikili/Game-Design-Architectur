@@ -9,6 +9,9 @@ public class FMODEvents : MonoBehaviour
 	[field: Header("UI")]
 	[field: SerializeField] public EventReference SE_SwitchAround { get; private set; }
 
+	[field: Header("player")]
+	[field: SerializeField] public EventReference SE_EnergyRefill { get; private set; }
+
 	[field: Header("UI")]
 	[field: SerializeField] public EventReference SE_MouseKlick { get; private set; }
 
@@ -47,6 +50,7 @@ public class FMODEvents : MonoBehaviour
 	[field: SerializeField] public EventReference SE_Player_PlaceBox { get; private set; }
 	[field: SerializeField] public EventReference SE_Player_FahneAufstellen { get; private set; }
 	[field: SerializeField] public EventReference SE_Player_FahneAbbauen { get; private set; }
+	[field: SerializeField] public EventReference VL_Player_Dies { get; private set; }
 	#endregion
 
 
