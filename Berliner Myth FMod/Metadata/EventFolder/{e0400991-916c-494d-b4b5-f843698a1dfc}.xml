@@ -5,7 +5,7 @@
 			<value>Scatterer</value>
 		</property>
 		<relationship name="folder">
-			<destination>{ec5817d7-441b-4b4d-9165-7d33393d0614}</destination>
+			<destination>{ff2a3365-d9a0-4962-a646-b2bf2f6c050a}</destination>
 		</relationship>
 	</object>
 </objects>
