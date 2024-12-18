@@ -34,6 +34,7 @@ public class AudioManager : MonoBehaviour
     private List<StudioEventEmitter> eventEmitters;
 
     private EventInstance ambienceEventInstance;
+    private EventInstance ambientEventInstance;
     public EventInstance musicEventInstance;
 
     public static AudioManager instance { get; private set; }
@@ -57,7 +58,6 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        InitializeAmbience(FMODEvents.instance.BackgroundNoise);
         MusicForThisScene();
 
         if (SceneManager.GetActiveScene().name == "Game")
@@ -72,6 +72,12 @@ public class AudioManager : MonoBehaviour
         //musicBus.setVolume(musicVolume);
         //ambienceBus.setVolume(ambienceVolume);
         //sfxBus.setVolume(SFXVolume);
+    }
+
+    private void InitializeAmbient(EventReference ambientEventReference)
+    {
+        ambientEventInstance = CreateInstance(ambientEventReference);
+        ambientEventInstance.start();
     }
 
     private void InitializeAmbience(EventReference ambienceEventReference)
@@ -141,28 +147,38 @@ public class AudioManager : MonoBehaviour
 	{
         if (SceneManager.GetActiveScene().name == "TitleScene")
         {
+            InitializeAmbient(FMODEvents.instance.EndingBackgroundNoise);
             InitializeMusic(FMODEvents.instance.ST_TitleScreen);
         }
-        
+
+        if (SceneManager.GetActiveScene().name == "Game")
+        {
+            InitializeAmbience(FMODEvents.instance.BackgroundNoise);
+        }
+
         if (SceneManager.GetActiveScene().name == "EndingScene1")
         {
-            instance.PlayOneShot(FMODEvents.instance.VL_Player_Dies, this.transform.position);
             InitializeMusic(FMODEvents.instance.ST_Ending1);
+            InitializeAmbient(FMODEvents.instance.EndingBackgroundNoise);
+            instance.PlayOneShot(FMODEvents.instance.VL_Player_Dies, this.transform.position);
         }
 
         if (SceneManager.GetActiveScene().name == "EndingScene2")
         {
             InitializeMusic(FMODEvents.instance.ST_Ending2);
+            InitializeAmbient(FMODEvents.instance.EndingBackgroundNoise);
         }
 
         if (SceneManager.GetActiveScene().name == "EndingScene3_blue")
         {
             InitializeMusic(FMODEvents.instance.ST_Ending3);
+            InitializeAmbient(FMODEvents.instance.EndingBackgroundNoise);
         }
 
         if (SceneManager.GetActiveScene().name == "EndingScene3_red")
         {
             InitializeMusic(FMODEvents.instance.ST_Ending3);
+            InitializeAmbient(FMODEvents.instance.EndingBackgroundNoise);
         }
     }
     #endregion

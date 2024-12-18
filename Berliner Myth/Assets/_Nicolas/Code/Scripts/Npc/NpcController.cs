@@ -144,6 +144,7 @@ public class NpcController : MonoBehaviour
 
         if (CurrentHealth <= 0f)
         {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.VL_NPC_ScreamsInPain, this.transform.position);
             Die();
         }
     }
@@ -156,11 +157,13 @@ public class NpcController : MonoBehaviour
     public void ShowPositivReaction()
     {
         ShowReaction(positiveRectionSprite);
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.VL_NPC_Approves, this.transform.position);
     }
 
     public void ShowNegativReaction()
     {
        ShowReaction(negativeRectionSprite);
+       AudioManager.instance.PlayOneShot(FMODEvents.instance.VL_NPC_Disapproves, this.transform.position);
     }
 
     private void ShowReaction(Sprite reactionSprite)

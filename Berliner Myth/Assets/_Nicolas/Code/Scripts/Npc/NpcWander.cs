@@ -1103,6 +1103,7 @@ public class NpcWander : NpcComponent
     {
         if (npc.LastAttacker != null && npc.LastAttacker.GroupName != npc.GroupName) //ensure attacker is from the other group
         {
+            //AudioManager.instance.PlayOneShot(FMODEvents.instance.VL_NPC_Disapproves, this.transform.position);
             NpcWander attackerWander = npc.LastAttacker.GetComponent<NpcWander>();
 
             if (attackerWander != null && attackerWander.state == Estate.AttackingOthers)

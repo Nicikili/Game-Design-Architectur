@@ -17,6 +17,9 @@ TagManager:
   - Escalation1
   - Escalation2
   - Escalation3
+  - StartGame
+  - Quit
+  - Options
   layers:
   - Default
   - TransparentFX

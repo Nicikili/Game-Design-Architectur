@@ -12,12 +12,13 @@ public class FMODEvents : MonoBehaviour
 	[field: Header("player")]
 	[field: SerializeField] public EventReference SE_EnergyRefill { get; private set; }
 
-	[field: Header("UI")]
-	[field: SerializeField] public EventReference SE_MouseKlick { get; private set; }
+	//[field: Header("UI")]
+	//[field: SerializeField] public EventReference SE_MouseKlick { get; private set; }
 
 	#region ambiente
 	[field: Header("ambiente")]
 	[field: SerializeField] public EventReference BackgroundNoise { get; private set; }
+	[field: SerializeField] public EventReference EndingBackgroundNoise { get; private set; }
 	#endregion
 
 	#region music
@@ -39,7 +40,11 @@ public class FMODEvents : MonoBehaviour
 
 	#region NPC
 	[field: Header("NPC")]
-	[field: SerializeField] public EventReference VL_NPC_GoesToOtherNPC { get; private set; }
+	[field: SerializeField] public EventReference VL_NPC_GoesToOtherNPC { get; private set; } //Hey
+	[field: SerializeField] public EventReference VL_NPC_Approves { get; private set; }
+	[field: SerializeField] public EventReference VL_NPC_Disapproves { get; private set; }
+	[field: SerializeField] public EventReference VL_NPC_PunchesOtherNPC { get; private set; }
+	[field: SerializeField] public EventReference VL_NPC_ScreamsInPain { get; private set; }
 	#endregion
 
 	#region Player
