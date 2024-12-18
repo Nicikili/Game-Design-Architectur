@@ -116,10 +116,10 @@ MonoBehaviour:
     Path: event:/VL_NPC_GoesToOtherNPC
   <VL_Player_Speech>k__BackingField:
     Guid:
-      Data1: 192396436
-      Data2: 1087474796
-      Data3: 1493101718
-      Data4: -736190620
+      Data1: 1434879258
+      Data2: 1117436684
+      Data3: 1130292630
+      Data4: 606419255
     Path: event:/Player/SE_Player_Speech
   <VL_Player_ScreamsInPain>k__BackingField:
     Guid:

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.SceneManagement;
+using FMOD.Studio;
 
 [SelectionBase]
 public class PlayerController : MonoBehaviour
@@ -40,7 +41,10 @@ public class PlayerController : MonoBehaviour
 
     public bool isSpeaking = false;
     public bool startSpeech = false;
-    public string activeSpeechGroup = "None"; 
+    public string activeSpeechGroup = "None";
+
+    //audio
+    private EventInstance playerTalksAudio;
 
     private void Awake()
     {
@@ -58,7 +62,13 @@ public class PlayerController : MonoBehaviour
         currentSpeechTime = maxSpeechDuration;
 
     }
-    private void Update()
+
+	private void Start()
+	{
+        playerTalksAudio = AudioManager.instance.CreateInstance(FMODEvents.instance.VL_Player_Speech);
+	}
+
+	private void Update()
     {
         if (agent.enabled)
         {
@@ -297,7 +307,6 @@ public class PlayerController : MonoBehaviour
         red.SetActive(false);
 
         startSpeech = true;
-        AudioManager.instance.PlayOneShot(FMODEvents.instance.VL_Player_Speech, this.transform.position);
         activeSpeechGroup = "Blue";
     }
 
@@ -313,8 +322,6 @@ public class PlayerController : MonoBehaviour
         blue.SetActive(false);
 
         startSpeech = true;
-        AudioManager.instance.PlayOneShot(FMODEvents.instance.VL_Player_Speech, this.transform.position);
-
         activeSpeechGroup = "Red";
     }
 
@@ -326,7 +333,6 @@ public class PlayerController : MonoBehaviour
         blue.SetActive(false);
 
         startSpeech = false;
-        
 
         activeSpeechGroup = "None";
     }
@@ -417,4 +423,26 @@ public class PlayerController : MonoBehaviour
         //GUI.Label(labelRect, $"Health: {currentHealt}%", BigStyle);
     }
 
+	private void FixedUpdate()
+	{
+        UpdateSound();
+    }
+
+	private void UpdateSound()
+	{
+        if (startSpeech == true)
+        {
+            PLAYBACK_STATE playbackState;
+            playerTalksAudio.getPlaybackState(out playbackState);
+            if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+            {
+                playerTalksAudio.start();
+            }
+        }
+
+        else
+		{
+            playerTalksAudio.stop(STOP_MODE.ALLOWFADEOUT);
+		}
+	}
 }
