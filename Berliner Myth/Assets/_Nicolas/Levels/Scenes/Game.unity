@@ -2488,6 +2488,23 @@ PrefabInstance:
       propertyPath: controller
       value: 
       objectReference: {fileID: 1261617914}
+    - target: {fileID: 6301131392637148130, guid: 2c36fd99b243c0542942c4c181f113ef,
+        type: 3}
+      propertyPath: bloodPoolPrefab
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6301131392637148130, guid: 2c36fd99b243c0542942c4c181f113ef,
+        type: 3}
+      propertyPath: redDeadBodyPrefab
+      value: 
+      objectReference: {fileID: 2537298863215835255, guid: 18fb8ff8e36b1c14ea86794bc797168b,
+        type: 3}
+    - target: {fileID: 6301131392637148130, guid: 2c36fd99b243c0542942c4c181f113ef,
+        type: 3}
+      propertyPath: blueDeadBodyPrefab
+      value: 
+      objectReference: {fileID: 3341217608819405900, guid: 0be67cc55ed7afd47a8d25fede0d4263,
+        type: 3}
     - target: {fileID: 6588637055544817644, guid: 2c36fd99b243c0542942c4c181f113ef,
         type: 3}
       propertyPath: duration
