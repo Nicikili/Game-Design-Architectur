@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -986,6 +987,8 @@ public class NpcWander : NpcComponent
 
             npc.agent.speed = 3.5f;
 
+            FacePlayer();
+
             if (npc.controller.activeSpeechGroup == npc.GroupName)
             {
                 npc.ShowPositivReaction();
@@ -1138,6 +1141,22 @@ public class NpcWander : NpcComponent
         npc.agent.SetDestination(PlayerArea.GetRandomPoint());
     }
 
+    void FacePlayer()
+    {
+        if (npc.player != null)
+        {
+            // Calculate the direction to the player
+            Vector3 directionToPlayer = npc.player.transform.position - npc.transform.position;
+            directionToPlayer.y = 0; // Lock rotation to the Y-axis
+
+            // Determine the target rotation
+            Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
+
+            // Use DoTween for smooth rotation
+            npc.transform.DORotateQuaternion(targetRotation, 0.5f) // Adjust duration (0.5f) as needed
+                .SetEase(Ease.OutCubic); // Add easing for a smoother effect
+        }
+    }
     void SetPlayerDestination() //set destination towards near the player
     {
         Vector3 directionToPlayer = npc.player.transform.position - transform.position;

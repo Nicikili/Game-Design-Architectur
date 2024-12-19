@@ -89,7 +89,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.6
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -102,7 +102,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 4759365461486199029}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.6
   m_Speed: 2.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -159,6 +159,12 @@ MonoBehaviour:
     type: 3}
   negativeRectionSprite: {fileID: 21300000, guid: 0d07481fb707d454cb13d29181d0d7d9,
     type: 3}
+  redDeadBodyPrefab: {fileID: 2537298863215835255, guid: 18fb8ff8e36b1c14ea86794bc797168b,
+    type: 3}
+  blueDeadBodyPrefab: {fileID: 3341217608819405900, guid: 0be67cc55ed7afd47a8d25fede0d4263,
+    type: 3}
+  bloodPoolPrefab: {fileID: 3448611185911849498, guid: 30f53e13997db754d987ba5647365d29,
+    type: 3}
 --- !u!114 &6588637055544817644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,10 +177,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a89e82c955eb5d4089a57013c5e1e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  squishAmount: 0.8
-  bobAmount: 0.1
-  duration: 1.5
-  animatedPart: {fileID: 0}
+  squishAmount: 0.9
+  bobAmount: 0.2
+  duration: 1
+  animatedPart: {fileID: 3637618335055731660}
 --- !u!114 &3502301081068667198
 MonoBehaviour:
   m_ObjectHideFlags: 0

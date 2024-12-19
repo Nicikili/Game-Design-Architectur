@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 836f40dec6bd7ad40a802556062975d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InnerRadius: 2
-  OuterRadius: 7
+  InnerRadius: 2.5
+  OuterRadius: 8.5
   Angle: 180
 --- !u!1 &1714178798357509633
 GameObject:
@@ -1140,7 +1140,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d03968fd7fcc32c42a419a2233465566, type: 2}
+  - {fileID: 2100000, guid: 66c98d0011e4b5d4488822d0616e9830, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1554,7 +1554,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d03968fd7fcc32c42a419a2233465566, type: 2}
+  - {fileID: 2100000, guid: 66c98d0011e4b5d4488822d0616e9830, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1693,7 +1693,7 @@ NavMeshObstacle:
   m_Enabled: 0
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.6, y: 1, z: 0.6}
+  m_Extents: {x: 0.8, y: 1.25, z: 0.8}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -1741,7 +1741,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8485216173188709264}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
