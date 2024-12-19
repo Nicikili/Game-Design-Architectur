@@ -1328,9 +1328,9 @@ public class NpcWander : NpcComponent
 
         npc.agent.SetDestination(npc.player.transform.position);
 
-        if (Vector3.Distance(npc.agent.transform.position, npc.player.transform.position) <= 4f)
+        if (Vector3.Distance(npc.agent.transform.position, npc.player.transform.position) <= 2f)
         {
-            npc.controller.PlayerTakenDamage(Time.deltaTime * 3f);
+            npc.controller.PlayerTakenDamage(Time.deltaTime * 5f);
         }
 
     }
@@ -1374,7 +1374,7 @@ public class NpcWander : NpcComponent
 
         if (target != null && Vector3.Distance(npc.agent.transform.position, target.transform.position) <= 2f)
         {
-            target.TakenDamage(Time.deltaTime * 3, npc);
+            target.TakenDamage(Time.deltaTime * 4.5f, npc);
         }
     }
 

@@ -34,14 +34,14 @@ public class MainSceneManager : MonoBehaviour
             fullscreenPassRendererFeatrue.SetActive(true);
             isFullscreenActive = true;
 
-            Debug.Log("shader on");
+            //Debug.Log("shader on");
         }
         else if(scene.name != targetScenenName && isFullscreenActive)
         {
             fullscreenPassRendererFeatrue.SetActive(false);
             isFullscreenActive = false;
 
-            Debug.Log("shader off");
+            //Debug.Log("shader off");
         }
     }
 }

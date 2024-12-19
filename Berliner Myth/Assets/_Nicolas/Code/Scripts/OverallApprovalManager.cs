@@ -140,7 +140,7 @@ public class OverallApprovalManager : MonoBehaviour
 
         if (imbalance > 10) //threshold for imbalance
         {
-            float adjustmentRate = imbalance * 0.1f; //scale adjustment for imbalance ticker
+            float adjustmentRate = imbalance * 0.05f; //scale adjustment for imbalance ticker
             imbalanceTicker += adjustmentRate * Time.deltaTime;
 
             overallApprovalPercentage = Mathf.Clamp(overallApprovalPercentage + Mathf.RoundToInt(imbalanceTicker), -100, 100);
@@ -168,7 +168,7 @@ public class OverallApprovalManager : MonoBehaviour
         return false;   
     }
 
-    private float CalculateAverageDeviation()
+    public float CalculateAverageDeviation()
     {
         if (allNpcs.Count == 0) return 0;
 
@@ -188,13 +188,16 @@ public class OverallApprovalManager : MonoBehaviour
 
     private string DetermineEscalationLevel(float averageDeviation)
     {
-        if (averageDeviation < 20) return "calm"; // minimal deviation
+        if (deadNpcCount >= 30 || overallApprovalPercentage >= 50) return "strong";
 
-        if (averageDeviation < 40) return "soft"; // moderate deviation
+        if ((deadNpcCount < 30 && deadNpcCount >= 20) || (overallApprovalPercentage < 50 && overallApprovalPercentage >= 40)) return "middle"; // significant deviation
 
-        if (averageDeviation < 60) return "middle"; // significant deviation
+        if ((deadNpcCount < 20 && deadNpcCount >= 10) || (overallApprovalPercentage < 40 && overallApprovalPercentage >= 20)) return "soft"; // moderate deviation
 
-        return "strong";                            // high deviation
+        if ( deadNpcCount < 10 || overallApprovalPercentage < 20) return "calm"; // minimal deviation
+
+        return "calm";
+
     }
 
     private void WinConditionMet()
@@ -262,7 +265,7 @@ public class OverallApprovalManager : MonoBehaviour
                     AudioManager.instance.currentParameter = "Calm";
                     AudioManager.instance.SetMusicParameter();
                     //AudioManager.instance.SetMusicArea(area);
-                    //Debug.Log("playing song 1");
+                    Debug.Log("playing song 1");
 
                     break;
                 case "soft":
@@ -271,7 +274,7 @@ public class OverallApprovalManager : MonoBehaviour
                     AudioManager.instance.finalParameter += 1;
                     AudioManager.instance.SetMusicParameter();
                     //AudioManager.instance.SetMusicArea(area);
-                    //Debug.Log("playing song 2");
+                    Debug.Log("playing song 2");
 
                     break;
                 case "middle":
@@ -280,7 +283,7 @@ public class OverallApprovalManager : MonoBehaviour
                     AudioManager.instance.finalParameter += 1;
                     AudioManager.instance.SetMusicParameter();
                     //AudioManager.instance.SetMusicArea(area);
-                    //Debug.Log("playing song 3");
+                    Debug.Log("playing song 3");
 
                     break;
                 case "strong":
@@ -289,7 +292,7 @@ public class OverallApprovalManager : MonoBehaviour
                     AudioManager.instance.finalParameter += 1;
                     AudioManager.instance.SetMusicParameter();
                     //AudioManager.instance.SetMusicArea(EscalationCurve.Escalation3);
-                    //Debug.Log("playing song 4");
+                    Debug.Log("playing song 4");
 
                     break;
             }
@@ -351,6 +354,7 @@ public class OverallApprovalManager : MonoBehaviour
 
         // Display the overall percentage
         //GUI.Label(labelRect, $"Approval: {overallApprovalPercentage}%", BigStyle);
+        GUI.Label(labelRect, $"Deviation: {CalculateAverageDeviation()}: {deadNpcCount}%", style);
 
         float yOffset = labelHeight + 10;
         foreach (var group in groupCounts)
@@ -362,7 +366,7 @@ public class OverallApprovalManager : MonoBehaviour
                 labelHeight
                 );
 
-            //GUI.Label(groupLabelRect, $"{group.Key}: {group.Value}", style);
+            GUI.Label(groupLabelRect, $"{group.Key}: {group.Value}", style);
             yOffset += labelHeight;
         }
 
@@ -375,7 +379,7 @@ public class OverallApprovalManager : MonoBehaviour
                 labelHeight
                 );
 
-            //GUI.Label(stateLabelRect, $"{state.Key}: {state.Value}", style);
+            GUI.Label(stateLabelRect, $"{state.Key}: {state.Value}", style);
             yOffset += labelHeight;
 
         }

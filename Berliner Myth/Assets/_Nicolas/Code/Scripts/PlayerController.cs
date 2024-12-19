@@ -47,6 +47,11 @@ public class PlayerController : MonoBehaviour
     private EventInstance playerTalksAudio;
     private bool alreadyTriggered = true;
 
+    //scream cooldowm
+
+    private bool canScream = true;
+    private float screamCooldown = 2.5f;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -222,7 +227,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isSpeaking)
         {
-            Debug.Log("Stopped Speaking for Blue");
+            //Debug.Log("Stopped Speaking for Blue");
             animator.SetBool("IsSpeaking", false);
             blue.SetActive(false);
 
@@ -244,7 +249,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isSpeaking)
         {
-            Debug.Log("Stopped Speaking for Red");
+            //Debug.Log("Stopped Speaking for Red");
             animator.SetBool("IsSpeaking", false);
             red.SetActive(false);
 
@@ -255,7 +260,7 @@ public class PlayerController : MonoBehaviour
 
     private void Speak()
     {
-        Debug.Log("I am speaking");
+        //Debug.Log("I am speaking");
 
         //Disable Player Movement
         isSpeaking = true;
@@ -279,7 +284,7 @@ public class PlayerController : MonoBehaviour
 
     private void StopSpeak()
     {
-        Debug.Log("Stopped speaking");
+        //Debug.Log("Stopped speaking");
 
         //Switch to NavMesh Obstacle
         obstacle.enabled = false;
@@ -308,7 +313,7 @@ public class PlayerController : MonoBehaviour
     {
         if (currentSpeechTime <= 0) return;
 
-        Debug.Log("Start Speaking for Blue");
+        //Debug.Log("Start Speaking for Blue");
 
         animator.SetBool("IsSpeaking", true);
 
@@ -323,7 +328,7 @@ public class PlayerController : MonoBehaviour
     {
         if (currentSpeechTime <= 0) return;
 
-        Debug.Log("Start Speaking for Red");
+        //Debug.Log("Start Speaking for Red");
 
         animator.SetBool("IsSpeaking", true);
 
@@ -388,7 +393,13 @@ public class PlayerController : MonoBehaviour
     }
     public void PlayerTakenDamage(float damage)
     {
-        AudioManager.instance.PlayOneShot(FMODEvents.instance.VL_Player_ScreamsInPain, this.transform.position);
+        if (canScream)
+        {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.VL_Player_ScreamsInPain, this.transform.position);
+            canScream = false;
+            StartCoroutine(ResetScream());
+        }
+
         currentHealt -= damage;
         currentHealt = Mathf.Clamp(currentHealt, 0, maxHealth);
 
@@ -399,11 +410,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private IEnumerator ResetScream()
+    {
+        yield return new WaitForSeconds(screamCooldown);
+        canScream = true;
+    }
+
     private void Die()
     {
         //Handle screenchange to Player death Game Over TODO
 
-        Debug.Log("you have died");
+        //Debug.Log("you have died");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
     }

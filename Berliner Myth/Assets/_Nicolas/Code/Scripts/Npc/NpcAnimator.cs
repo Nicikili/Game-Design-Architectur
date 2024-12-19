@@ -18,17 +18,19 @@ public class NpcAnimator : NpcComponent
 
     private void Start()
     {
-
-        if (animatedPart != null)
+        if (npc != null)
         {
-            DOTween.SetTweensCapacity(2500, 50);
+            if (animatedPart != null)
+            {
+                DOTween.SetTweensCapacity(2500, 50);
 
-            //store npc's origninal scale
-            originalScale = animatedPart.localScale;
-            originalPosition = animatedPart.localPosition;
+                //store npc's origninal scale
+                originalScale = animatedPart.localScale;
+                originalPosition = animatedPart.localPosition;
 
-            //starz the squish loop
-            StartSquishAnimation();
+                //starz the squish loop
+                StartSquishAnimation();
+            }
         }
     }
 
