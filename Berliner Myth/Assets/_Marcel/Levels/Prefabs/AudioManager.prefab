@@ -64,7 +64,7 @@ MonoBehaviour:
       Data2: 1242798052
       Data3: 2015896502
       Data4: 1895425974
-    Path: event:/Ambient_BG_CityNoise
+    Path: event:/Ambient/Ambient_BG_CityNoise
   <EndingBackgroundNoise>k__BackingField:
     Guid:
       Data1: -950701094
@@ -113,7 +113,7 @@ MonoBehaviour:
       Data2: 1161679284
       Data3: 1732237708
       Data4: 951303320
-    Path: event:/VL_NPC_GoesToOtherNPC
+    Path: event:/NPC/VL_NPC_GoesToOtherNPC
   <VL_NPC_Approves>k__BackingField:
     Guid:
       Data1: -329827562
@@ -238,7 +238,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OverallApprovalManagerScript: {fileID: 0}
   area: 0
-  masterVolume: 1
   musicVolume: 1
   ambienceVolume: 1
   SFXVolume: 1

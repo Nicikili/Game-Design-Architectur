@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -36,6 +37,14 @@ public class NpcController : MonoBehaviour
 
     private GameObject reactionBubbleInstance;
     private SpriteRenderer reactionSpriteRenderer;
+
+    //NPC Death
+
+    [SerializeField] private GameObject redDeadBodyPrefab;
+    [SerializeField] private GameObject blueDeadBodyPrefab;
+    [SerializeField] private GameObject bloodPoolPrefab;
+
+    private bool hasDied = false;
 
     public float CurrentSpeed
     {
@@ -151,6 +160,39 @@ public class NpcController : MonoBehaviour
 
     private void Die()
     {
+        if (hasDied) return; // Exit if the NPC has already died
+        hasDied = true;
+
+        GameObject deadBodyPrefab = null;
+
+        if (GroupName == "Red")
+        {
+            deadBodyPrefab = redDeadBodyPrefab;
+        }
+        else if (GroupName == "Blue")
+        {
+            deadBodyPrefab = blueDeadBodyPrefab;
+        }
+
+        Quaternion randomRotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
+
+        if (deadBodyPrefab != null) 
+        {
+            Instantiate(deadBodyPrefab, transform.position, randomRotation);
+        }
+
+        Vector3 bloodOffset = new Vector3(Random.Range(-0.5f, 0.5f), 0, Random.Range(-0.5f, 0.5f));
+        Vector3 bloodPosition = transform.position + bloodOffset;
+
+        if (bloodPoolPrefab != null)
+        {
+            GameObject bloodPool = Instantiate(bloodPoolPrefab, bloodPosition, Quaternion.identity);
+            bloodPool.transform.localScale = Vector3.zero;
+
+            bloodPool.transform.DOScale(new Vector3(1f, 1f, 1f), 2f)
+                .SetEase(Ease.OutQuad);
+        }
+
         Destroy(gameObject);
     }
 
