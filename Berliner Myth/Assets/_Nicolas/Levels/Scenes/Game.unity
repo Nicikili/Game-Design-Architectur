@@ -1467,6 +1467,8 @@ MonoBehaviour:
   zoom: {fileID: -4084255176300231960, guid: 9872429b94b1b2644825cc9b209810b3, type: 3}
   rotate: {fileID: -4689000348990716785, guid: 9872429b94b1b2644825cc9b209810b3, type: 3}
   look: {fileID: -8521393718608649172, guid: 9872429b94b1b2644825cc9b209810b3, type: 3}
+  minZoom: 4
+  maxZoom: 30
 --- !u!114 &203097476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3111,8 +3113,8 @@ GameObject:
   m_Component:
   - component: {fileID: 496329250}
   - component: {fileID: 496329249}
-  - component: {fileID: 496329251}
   - component: {fileID: 496329252}
+  - component: {fileID: 496329253}
   m_Layer: 0
   m_Name: Scene Manager
   m_TagString: Calm
@@ -3151,7 +3153,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &496329251
+--- !u!114 &496329252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496329248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 461d70754e074254c96b1a1136c528ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  area: 0
+--- !u!114 &496329253
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3166,19 +3181,6 @@ MonoBehaviour:
   targetScenenName: Game
   fullscreenPassRendererFeatrue: {fileID: -1873353316077007959, guid: c40be3174f62c4acf8c1216858c64956,
     type: 2}
---- !u!114 &496329252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 496329248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 461d70754e074254c96b1a1136c528ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  area: 0
 --- !u!1 &497373150
 GameObject:
   m_ObjectHideFlags: 0

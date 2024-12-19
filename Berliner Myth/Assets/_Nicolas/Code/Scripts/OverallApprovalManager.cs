@@ -354,7 +354,7 @@ public class OverallApprovalManager : MonoBehaviour
 
         // Display the overall percentage
         //GUI.Label(labelRect, $"Approval: {overallApprovalPercentage}%", BigStyle);
-        GUI.Label(labelRect, $"Deviation: {CalculateAverageDeviation()}: {deadNpcCount}%", style);
+        //GUI.Label(labelRect, $"Deviation: {CalculateAverageDeviation()}: {deadNpcCount}%", style);
 
         float yOffset = labelHeight + 10;
         foreach (var group in groupCounts)
@@ -366,7 +366,7 @@ public class OverallApprovalManager : MonoBehaviour
                 labelHeight
                 );
 
-            GUI.Label(groupLabelRect, $"{group.Key}: {group.Value}", style);
+            //GUI.Label(groupLabelRect, $"{group.Key}: {group.Value}", style);
             yOffset += labelHeight;
         }
 
@@ -379,7 +379,7 @@ public class OverallApprovalManager : MonoBehaviour
                 labelHeight
                 );
 
-            GUI.Label(stateLabelRect, $"{state.Key}: {state.Value}", style);
+            //GUI.Label(stateLabelRect, $"{state.Key}: {state.Value}", style);
             yOffset += labelHeight;
 
         }
